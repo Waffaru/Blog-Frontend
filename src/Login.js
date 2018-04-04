@@ -6,7 +6,7 @@ class Login extends Component {
         super(props);
         this.handleClick = this.handleClick.bind(this);
         this.logOut = this.logOut.bind(this);
-        this.state = {username: "", password: ""};
+        this.state = {username: "", password: "", logged: false};
         this.logged = false;
     }
 
@@ -33,27 +33,26 @@ class Login extends Component {
             .catch(error => console.error('Error:', error))
             .then(response => {
                 if(response){
-                    this.logged = response;
-                    this.setState({username: "", password: ""});
+                    this.setState({username: "", password: "", logged: response});
                 }else{
-                    this.logged = response;
+                    this.setState({logged: response});
                 }
 
             });
         //TODO TÄHÄN ON SAATAVA SLEEP
-        console.log(this.logged);
+        console.log(this.state.logged);
         //document.getElementById("login").reset();
 
         //Callback function to parent
-        //this.props.postButtonClicked();
+        //this.props.postButton§Clicked();
     }
 
     logOut(){
-        this.logged = false;
-        alert(this.logged);
+        this.setState({logged: false});
+        //alert(this.logged);
     }
     render() {
-        if(!this.logged){
+        if(!this.state.logged){
             return (
                 <form id="login">
                     Username :
