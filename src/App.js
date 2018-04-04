@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import BlogPost from './BlogPost';
+import Field from './Field';
 //import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.updateUI = this.updateUI.bind(this);
+    this.state = {update: false};
+  }
+  updateUI() {
+    this.setState({update: true});
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          Hello
-        </p>
+      <div>
+        <Field postButtonClicked={this.updateUI}/>
+        <BlogPost update={this.state.update}/>
       </div>
     );
   }

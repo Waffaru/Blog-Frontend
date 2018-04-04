@@ -8,10 +8,32 @@ class Field extends Component {
     }
 
     handleChange(e) {
-        let id = e.target.id;
-        let value = e.target.value;
-        this.setState({id: value});
+        this.setState({ [e.target.id]: e.target.value });
         console.log(`${e.target.id}: ${e.target.value}`);
+        console.log(this.state);
+    }
+
+    
+    handleClick(e) {
+        //TODO: Fix this 
+        e.preventDefault();
+        console.log("sending");
+        console.log(this.state);
+        
+        var url = 'http://localhost:8080/blogpost'
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({title: this.state.title, body: this.state.body, username: this.state.username}), 
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
+            }).then(res => res.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => console.log('Success:', response))
+            document.getElementById("postBlog").reset();
+            this.setState({title: "", body: "", username: ""});
+            //Callback function to parent
+            this.props.postButtonClicked();
     }
 
     render() {
@@ -31,22 +53,6 @@ class Field extends Component {
             <button id="nappi" onClick={(e) => this.handleClick(e)}>post blog</button>
             </div>
         );
-    }
-
-    handleClick() {
-        //TODO: Fix this 
-        console.log(this.state.title);
-        var url = 'http://localhost:8080/blogpost'
-        fetch(url, {
-            method: 'POST',
-            body: JSON.stringify({title: this.state.title, body: this.state.body, username: this.state.username}), 
-            headers: new Headers({
-                'Content-Type': 'application/json'
-            })
-            }).then(res => res.json())
-            .catch(error => console.error('Error:', error))
-            .then(response => console.log('Success:', response))
-            document.getElementById("postBlog").reset();
     }
 }
 

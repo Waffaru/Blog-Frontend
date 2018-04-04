@@ -3,14 +3,11 @@ import React, { Component } from 'react';
 class Blogs extends Component {
     constructor(props) {
         super(props);
-        //this.fetchBlogs = this.fetchBlogs.bind(this);
-        //this.Blogs = this.Blogs.bind(this);
-        //this.postBlog = this.postBlog.bind(this);
+        this.fetchPosts = this.fetchPosts.bind(this);
         this.state = {posts: []};
     }
 
-    componentDidMount() {
-        let _this = this;
+    fetchPosts() {
         let url = 'http://localhost:8080/blogpost'
 
         fetch(url).then((response) => response.json()).then((blogList) => {
@@ -19,12 +16,23 @@ class Blogs extends Component {
         })
     }
 
+    componentWillReceiveProps(props) {
+        if(props.update) { 
+            this.fetchPosts();
+        }
+        else {
+            console.log("false");
+        }
+    }
+
+    componentDidMount() {
+        this.fetchPosts();
+    }
+
     render() {
         let _this = this;
 
-            function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-            }            
+        function sleep(ms) {return new Promise(resolve => setTimeout(resolve, ms));}            
         function deletePost(id, e) {
             //TODO: Fixaa UI update
             e.preventDefault();
