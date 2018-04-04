@@ -4,7 +4,9 @@ class Blogs extends Component {
     constructor(props) {
         super(props);
         this.fetchPosts = this.fetchPosts.bind(this);
-        this.state = {posts: []};
+        this.openPost = this.openPost.bind(this);
+        this.returnToPostList = this.returnToPostList.bind(this);
+        this.state = {posts: [], postIsClicked: false, currentPost: {}};
     }
 
     fetchPosts() {
@@ -27,6 +29,14 @@ class Blogs extends Component {
 
     componentDidMount() {
         this.fetchPosts();
+    }
+
+    openPost(e, blog) {
+        this.setState({postIsClicked: true, currentPost: blog})
+    }
+
+    returnToPostList(e) {
+        this.setState({postIsClicked: false, currentPost: {}});
     }
 
     render() {
@@ -60,18 +70,31 @@ class Blogs extends Component {
             fetch(url);     
         }  
         
-        let blogList = this.state.posts;
-        var blogP = []
-        for(let blog of blogList) {
-            blogP.push(<div>
-                <h2>{blog.title}</h2>
-            <p>{blog.username} @ {blog.date}</p>
-            <p>{blog.body}</p> 
-            <button id={`edit-${blog.id}`}>Edit</button>
-            <button id={`dlt-${blog.id}`}  onClick={(e) => deletePost(blog.id, e)}>Delete</button>
-            <button id={`dislike-${blog.id}`} onClick={(e) => dislikePost(blog.id, e)}> Dislike </button> </div>)
+        if(!this.state.postIsClicked) {
+            let blogList = this.state.posts;
+            var blogP = []
+            for(let blog of blogList) {
+                blogP.push(<div>
+                <h2 onClick={(e) => this.openPost(e, blog)}>{blog.title}</h2>
+                <p>{blog.username} @ {blog.date}</p>
+                <p>{blog.body}</p> 
+                <button id={`edit-${blog.id}`}>Edit</button>
+                <button id={`dlt-${blog.id}`}  onClick={(e) => deletePost(blog.id, e)}>Delete</button>
+                <button id={`dislike-${blog.id}`} onClick={(e) => dislikePost(blog.id, e)}> Dislike </button> </div>)
+            }
+            return <div>{blogP}</div>
         }
-        return <div>{blogP}</div>
+        else {
+            return (
+                <div>
+                    <h2>{this.state.currentPost.title}</h2>
+                    <p>{this.state.currentPost.username} @ {this.state.currentPost.date}</p>
+                    <p>{this.state.currentPost.body}</p>
+                    <button onClick={(e) => this.returnToPostList(e)}>Go back</button>
+                </div>
+            );
+
+        }
     }
 }
 
