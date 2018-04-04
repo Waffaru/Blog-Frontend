@@ -20,7 +20,7 @@ class Field extends Component {
         console.log("sending");
         console.log(this.state);
         
-        var url = 'http://localhost:8080/blogpost'
+        var url = 'http://localhost:8080/blogpost';
         fetch(url, {
             method: 'POST',
             body: JSON.stringify({title: this.state.title, body: this.state.body, username: this.state.username}), 
@@ -29,7 +29,7 @@ class Field extends Component {
             })
             }).then(res => res.json())
             .catch(error => console.error('Error:', error))
-            .then(response => console.log('Success:', response))
+            .then(response => console.log('Success:', response));
             document.getElementById("postBlog").reset();
             this.setState({title: "", body: "", username: ""});
             //Callback function to parent
