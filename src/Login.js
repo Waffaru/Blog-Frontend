@@ -58,7 +58,7 @@ class Login extends Component {
                     Username :
                     <input type="text" id="username" onChange={(e) => this.handleChange(e)}/>
                     Password :
-                    <input type="text" id="password" onChange={(e) => this.handleChange(e)}/>
+                    <input type="password" id="password" onChange={(e) => this.handleChange(e)}/>
 
                     <input type="submit" id="loginBtn" value="Login" onClick={(e) => this.handleClick(e)}/>
                 </form>

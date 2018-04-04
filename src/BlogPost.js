@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Comment from './Comment';
 
 class Blogs extends Component {
     constructor(props) {
@@ -32,6 +33,8 @@ class Blogs extends Component {
     }
 
     openPost(e, blog) {
+        console.log(blog);
+        console.log(blog.id);
         this.setState({postIsClicked: true, currentPost: blog})
     }
 
@@ -85,12 +88,14 @@ class Blogs extends Component {
             return <div>{blogP}</div>
         }
         else {
+            console.log(`Hei kato tää!!!!`);
             return (
                 <div>
                     <h2>{this.state.currentPost.title}</h2>
                     <p>{this.state.currentPost.username} @ {this.state.currentPost.date}</p>
                     <p>{this.state.currentPost.body}</p>
                     <button onClick={(e) => this.returnToPostList(e)}>Go back</button>
+                    <Comment blogPostId={this.state.currentPost.id}/>
                 </div>
             );
 

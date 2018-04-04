@@ -5,11 +5,11 @@ class Comment extends Component {
     constructor(props) {
       super(props);
       this.fetchComments = this.fetchComments.bind(this);
-      this.state = {comments: []};
+      this.state = {comments: [], blogPostId: this.props.blogPostId};
     }
 
     fetchComments() {
-        let url = 'http://localhost:8080/comment'
+        let url = `http://localhost:8080/comment/byPostId/${this.state.blogPostId}`
 
         fetch(url).then((response) => response.json()).then((commentList) => {
                             this.setState({comments: commentList});
@@ -55,6 +55,8 @@ class Comment extends Component {
 
 
         let commentList = this.state.comments;
+        console.log(this.state.blogPostId);
+        console.log(commentList);
         var commentArr = []
         for(let comment of commentList) {
             commentArr.push(<div>
