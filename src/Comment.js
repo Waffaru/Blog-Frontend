@@ -1,6 +1,11 @@
 
 import React, { Component } from 'react';
-
+/**
+ * This component handles all comments of any specified post.
+ * It is used to render all the comments of a specified post.
+ * 
+ * This component is used as a child component for BlogPost.js
+ */
 class Comment extends Component {
     constructor(props) {
       super(props);
@@ -8,6 +13,9 @@ class Comment extends Component {
       this.state = {comments: [], blogPostId: this.props.blogPostId};
     }
 
+    /**
+     * Fetches all comments related to the specified blog post ID in state blogPostId.
+     */
     fetchComments() {
         let url = `http://localhost:8080/comment/byPostId/${this.state.blogPostId}`
 
@@ -21,6 +29,9 @@ class Comment extends Component {
         this.fetchComments();
     }
   
+    /**
+     * Renders all comments related to the blog post id.
+     */
     render() {
         let _this = this;
 
@@ -61,7 +72,7 @@ class Comment extends Component {
         for(let comment of commentList) {
             commentArr.push(<div>
             <p>{comment.username}</p>
-            <p> {comment.date} @ {comment.dislikes}</p>
+            <p> {comment.date} | {comment.dislikes}</p>
             <p>{comment.body}</p>
             <button id={`edit-${comment.id}`}>Edit</button>
             <button id={`dlt-${comment.id}`}  onClick={(e) => deletePost(comment.id, e)}>Delete</button>

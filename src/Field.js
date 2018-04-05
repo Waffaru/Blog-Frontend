@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-
+/**
+ * This component is used to send new blogposts to the backend.
+ * It is a child component of App.js
+ */
 class Field extends Component {
     constructor(props) {
         super(props);
