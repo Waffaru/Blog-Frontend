@@ -9,7 +9,7 @@ class Comment extends Component {
     constructor(props) {
       super(props);
       this.fetchComments = this.fetchComments.bind(this);
-      this.state = {comments: [], blogPostId: this.props.blogPostId};
+      this.state = {comments: [], blogPostId: this.props.blogPostId, logged: false};
     }
 
     /**
@@ -27,6 +27,10 @@ class Comment extends Component {
     componentDidMount() {
         this.fetchComments();
     }
+
+    componentWillReceiveProps(props) {
+        this.setState({logged: props.logged});
+    }    
   
     /**
      * Renders all comments related to the blog post id.
@@ -68,15 +72,26 @@ class Comment extends Component {
         console.log(this.state.blogPostId);
         console.log(commentList);
         var commentArr = []
-        for(let comment of commentList) {
-            commentArr.push(<div id={'commentDiv'}>
-            <p id={'commentUsername'}>{comment.username}</p>
-            <p id={'commentDate'}> {comment.date} | Dislikes {comment.dislikes}</p>
-            <p id={'commentBody'}>{comment.body}</p>
-            <button id={`edit-${comment.id}`}>Edit</button>
-            <button id={`dlt-${comment.id}`}  onClick={(e) => deletePost(comment.id, e)}>Delete</button>
-            <button id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}> Dislike </button> </div>)
+        if(this.state.logged) {
+            for(let comment of commentList) {
+                commentArr.push(<div id={'commentDiv'}>
+                <p id={'commentUsername'}>{comment.username}</p>
+                <p id={'commentDate'}> {comment.date} | Dislikes {comment.dislikes}</p>
+                <p id={'commentBody'}>{comment.body}</p>
+                <button id={`edit-${comment.id}`}>Edit</button>
+                <button id={`dlt-${comment.id}`}  onClick={(e) => deletePost(comment.id, e)}>Delete</button>
+                <button id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}> Dislike </button> </div>)
+            }            
+        } else {
+            for(let comment of commentList) {
+                commentArr.push(<div id={'commentDiv'}>
+                <p id={'commentUsername'}>{comment.username}</p>
+                <p id={'commentDate'}> {comment.date} | Dislikes {comment.dislikes}</p>
+                <p id={'commentBody'}>{comment.body}</p>
+                <button id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}> Dislike </button></div>)
+            }            
         }
+
         return <div>{commentArr}</div>
     }
   }

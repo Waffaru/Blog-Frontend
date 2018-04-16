@@ -152,7 +152,7 @@ class Blogs extends Component {
                             <p id={'openBlogpostUsername'}>{this.state.currentPost.username} @ {this.state.currentPost.date}</p>
                             <p id={'openBlogpostBody'}>{this.state.currentPost.body}</p>
                             <button onClick={(e) => this.returnToPostList(e)}>Go back</button>
-                            <Comment blogPostId={this.state.currentPost.id}/>
+                            <Comment blogPostId={this.state.currentPost.id} logged={this.state.logged}/>
                         </div>
                         </Col>
                     </row>
