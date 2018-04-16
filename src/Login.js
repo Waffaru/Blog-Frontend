@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Grid,Row,Col} from 'react-materialize';
+import {Grid,Row,Col,Navbar,NavItem,Input} from 'react-materialize';
 
 class Login extends Component {
 
@@ -62,14 +62,18 @@ class Login extends Component {
                         <Col m={2}l={3}>
                         </Col>
                         <Col s={12} m={12} l={12}>
-                            <form>
-                                Username :
-                                <input type="text" id="username" onChange={(e) => this.handleChange(e)}/>
-                                Password :
-                                <input type="password" id="password" onChange={(e) => this.handleChange(e)}/>
+                            <Navbar brand={'Pizza Lovers Blog'} right>
+                                <NavItem>
+                                    <Row>
+                                    Username :
+                                    <Input s={3} type="text" id="username" onChange={(e) => this.handleChange(e)}/>
+                                    Password :
+                                    <Input s={3} type="password" id="password" onChange={(e) => this.handleChange(e)}/>
 
-                                <input type="submit" id="loginBtn" value="Login" onClick={(e) => this.handleClick(e)}/>
-                            </form>
+                                    <Input s={3} type="submit" id="loginBtn" value="Login" onClick={(e) => this.handleClick(e)}/>
+                                    </Row>
+                                </NavItem>
+                            </Navbar>
                         </Col>
                     </Row>
                 </div>
