@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import {Grid,Row,Col} from 'react-materialize';
 import Comment from './Comment';
-import {Bootstrap, Grid, Row, Col} from 'react-bootstrap';
 
 /**
  * Component that handles blog posts.
@@ -108,9 +108,9 @@ class Blogs extends Component {
                 if(this.state.logged) {
                 blogP.push(
                     <Row>
-                        <Col sm={2}md={3}>
+                        <Col m={2}l={3}>
                         </Col>
-                        <Col xs={12} sm={8} md={6}>
+                        <Col s={12} m={12} l={12}>
                             <div id={'mainBlogpostDiv'}>
                             <h2 id={'mainBlogpostTitle'} onClick={(e) => this.openPost(e, blog)}>{blog.title}</h2>
                             <p id={'mainBlogpostUsername'}>{blog.username} @ {blog.date}</p>
@@ -124,9 +124,9 @@ class Blogs extends Component {
                 } else {
                     blogP.push(
                         <Row>
-                            <Col sm={2}md={3}>
+                            <Col m={2}l={3}>
                             </Col>
-                            <Col xs={12} sm={8} md={6}>
+                            <Col s={12} m={12} l={12}>
                                 <div id={'mainBlogpostDiv'}>
                                 <h2 id={'mainBlogpostTitle'} onClick={(e) => this.openPost(e, blog)}>{blog.title}</h2>
                                 <p id={'mainBlogpostUsername'}>{blog.username} @ {blog.date}</p>
@@ -137,16 +137,15 @@ class Blogs extends Component {
                     )                    
                 }
             }
-            return <Grid id={'gridClass'} fluid={true}><div><Row><Col sm={3}md={4}></Col><Col xs={12} sm={8} md={6}><h1 id={'blogMenu'}>Blog Menu</h1></Col></Row>{blogP}</div></Grid>
+            return <div><Row><Col sm={3}md={4}></Col><Col xs={12} sm={8} md={6}><h1 id={'blogMenu'}>Blog Menu</h1></Col></Row>{blogP}</div>
         }
         else {
             console.log(`Hei kato tää!!!!`);
             return (
-                <Grid id={'gridClass'}fluid={true}>
                     <Row>
-                        <Col sm={2}md={3}>
+                        <Col m={2}l={3}>
                         </Col>
-                        <Col xs={12} sm={8} md={6}>
+                        <Col s={12} m={12} l={12}>
                         <div id={'openBlogpostDiv'}>
                             <h2 id={'openBlogpostTitle'}>{this.state.currentPost.title}</h2>
                             <p id={'openBlogpostUsername'}>{this.state.currentPost.username} @ {this.state.currentPost.date}</p>
@@ -156,7 +155,6 @@ class Blogs extends Component {
                         </div>
                         </Col>
                     </Row>
-                </Grid>
             );
 
         }

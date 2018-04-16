@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Bootstrap, Grid, Row, Col} from 'react-bootstrap';
+import {Grid,Row,Col} from 'react-materialize';
 
 class Login extends Component {
 
@@ -58,11 +58,10 @@ class Login extends Component {
         if(!this.state.logged){
             return (
                   <div id="banner" role="banner">
-                <Grid>
                     <Row>
-                        <Col sm={2}md={3}>
+                        <Col m={2}l={3}>
                         </Col>
-                        <Col xs={12} sm={12} md={12}>
+                        <Col s={12} m={12} l={12}>
                             <form>
                                 Username :
                                 <input type="text" id="username" onChange={(e) => this.handleChange(e)}/>
@@ -73,21 +72,18 @@ class Login extends Component {
                             </form>
                         </Col>
                     </Row>
-                </Grid>
                 </div>
             );
         }else {
             return (
                 <div id="banner" role="banner">
-                <Grid>
                     <Row>
-                        <Col sm={2}md={3}>
+                        <Col m={2}l={3}>
                         </Col>
-                        <Col xs={12} sm={8} md={6}>
+                        <Col s={12} m={8} l={6}>
                             <button type="submit" id="logout" onClick={() => this.logOut()}>Logout</button>
                         </Col>
                     </Row>
-                </Grid>
                 </div>
             );
         }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Bootstrap, Grid, Row, Col} from 'react-bootstrap';
+import {Grid,Row,Col} from 'react-materialize';
 /**
  * This component is used to send new blogposts to the backend.
  * It is a child component of App.js
@@ -54,11 +54,10 @@ class Field extends Component {
     render() {
         if(this.state.logged) {
             return (
-                <Grid id={'gridClass'} fluid={true}>
                     <Row>
-                        <Col sm={2}md={3}>
+                        <Col m={2}l={3}>
                         </Col>
-                        <Col xs={12} sm={8} md={6}>
+                        <Col s={12} m={12} l={12}>
                         <div>
                         <form id="postBlog">
                             New Blog Post:<br/>
@@ -73,7 +72,6 @@ class Field extends Component {
                         </div>
                         </Col>
                     </Row>
-                </Grid>
         );
         }
         else{
