@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Grid,Row,Col,Navbar,NavItem,Input} from 'react-materialize';
+import {Grid,Row,Col,Navbar,NavItem,Input,Button} from 'react-materialize';
 
 class Login extends Component {
 
@@ -34,7 +34,7 @@ class Login extends Component {
             .catch(error => console.error('Error:', error))
             .then(response => {
                 if(response){
-                    this.setState({username: "", password: "", logged: response});
+                    this.setState({password: "", logged: response});
                     this.logged = true;
                     this.props.checkLogin();
                 }else{
@@ -57,41 +57,36 @@ class Login extends Component {
     render() {
         if(!this.state.logged){
             return (
-                  <div id="banner" role="banner">
                     <Row>
-                        <Col m={2}l={3}>
-                        </Col>
-                        <Col s={12} m={12} l={12}>
+                        <Col l={12}>
                             <Navbar brand={'Pizza Lovers Blog'} right>
-                                <NavItem>
-                                    <Row>
-                                    Username :
-                                    <Input s={3} type="text" id="username" onChange={(e) => this.handleChange(e)}/>
-                                    Password :
-                                    <Input s={3} type="password" id="password" onChange={(e) => this.handleChange(e)}/>
+                                    <Input s={4} type="text" id="username" label="Username" onChange={(e) => this.handleChange(e)}/>
 
-                                    <Input s={3} type="submit" id="loginBtn" value="Login" onClick={(e) => this.handleClick(e)}/>
-                                    </Row>
-                                </NavItem>
+                                    <Input s={5} type="password" id="password" label="Password" onChange={(e) => this.handleChange(e)}/>
+
+                                    <Button waves='light' s={3} type="submit" id="loginBtn" onClick={(e) => this.handleClick(e)}>Login</Button>
                             </Navbar>
                         </Col>
                     </Row>
-                </div>
             );
         }else {
             return (
-                <div id="banner" role="banner">
                     <Row>
-                        <Col m={2}l={3}>
-                        </Col>
-                        <Col s={12} m={8} l={6}>
-                            <button type="submit" id="logout" onClick={() => this.logOut()}>Logout</button>
+                        <Col l={12}>
+                            <Navbar brand={'Pizza Lovers Blog'} right>
+                                    <Row>
+                                    <Col l={6}>
+                                    Welcome {this.state.username}!
+                                    </Col>
+                                    <Col l={6}>
+                                    <Button waves='light' type="submit" id="logout" onClick={() => this.logOut()}>Logout</Button>
+                                    </Col>
+                                    </Row>
+                            </Navbar>
                         </Col>
                     </Row>
-                </div>
             );
         }
-
     }
 
 }

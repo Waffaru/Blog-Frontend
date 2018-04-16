@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Grid,Row,Col} from 'react-materialize';
+import {Grid,Row,Col, Input, Textarea, Button} from 'react-materialize';
 /**
  * This component is used to send new blogposts to the backend.
  * It is a child component of App.js
@@ -53,26 +53,35 @@ class Field extends Component {
 
     render() {
         if(this.state.logged) {
+            var margin = {
+                marginLeft: "0.75%"
+            }
             return (
+                <div>
                     <Row>
-                        <Col m={2}l={3}>
+                        <Col s={4}>
                         </Col>
-                        <Col s={12} m={12} l={12}>
-                        <div>
-                        <form id="postBlog">
-                            New Blog Post:<br/>
-                            <input type="text" id="title" placeholder={'Title'} onChange={(e) => this.handleChange(e)}/>
-                            <br/>
-                            <input type="text" id="username" placeholder={'Username'} onChange={(e) => this.handleChange(e)}/>
-                            <br/>
-                            <textarea id="body" rows="6" cols="25" placeholder="Kirjoita tähän" onChange={(e) => this.handleChange(e)}></textarea>
-                            <br/>
-                        </form>
-                        <button id="nappi" onClick={(e) => this.handleClick(e)}>post blog</button>
-                        </div>
+                        <h4>New Blog Post:</h4>
+                        </Row>
+                        <Row>
+                        <Col s={4}>
                         </Col>
+                        <Input type="text" s={2} id="username" placeholder='Username' onChange={(e) => this.handleChange(e)}/>
+                        <Input type="text" s={2}id="title" placeholder='Title' onChange={(e) => this.handleChange(e)}/>
                     </Row>
-        );
+                    <Row>
+                        <Col s={4}>
+                        </Col>
+                        <Input type="textarea" id="body" s={4}rows="6" cols="25" placeholder='Kirjoita tähän' onChange={(e) => this.handleChange(e)}/>
+
+                    </Row>   
+                    <Row> 
+                        <Col s={4}>
+                        </Col>
+                        <Button waves='light' id="nappi" style={margin} onClick={(e) => this.handleClick(e)}>post blog</Button>
+                    </Row>
+                </div>
+            );
         }
         else{
             return null;
