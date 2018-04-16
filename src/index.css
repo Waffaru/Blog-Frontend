@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
+        background-image:url('background-image.jpg');
 }
 
 #root {
@@ -16,14 +17,13 @@ body {
     background-size: cover;
 }
 /*Login div */
-#logging   {
-    margin-left:auto;
-    margin-right: 0;
+#login  {
+    display:flex;
+    justify-content: flex-end;
 }
 
 
-#blogPost   {
-
+#blogPost{
 }
 
 /* Blogpost main mother div */
@@ -61,7 +61,9 @@ body {
 
 /* Posting blog div */
 #postBlog{
-
+    display:flex;
+    justify-content:center;
+    flex-direction: column;
 }
 /* posting blog title field */
 #title  {
@@ -73,7 +75,7 @@ body {
 }
 /* posting blog body field */
 #body   {
-    height: 150px;
+    resize:none;
 }
 
 

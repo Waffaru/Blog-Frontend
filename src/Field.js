@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Bootstrap, Grid, Row, Col} from 'react-bootstrap';
 /**
  * This component is used to send new blogposts to the backend.
  * It is a child component of App.js
@@ -41,18 +42,26 @@ class Field extends Component {
 
     render() {
         return (
-            <div>
-            <form id="postBlog">
-                New Blog Post:<br/>
-                <input type="text" id="title" placeholder={'Title'} onChange={(e) => this.handleChange(e)}/>
-                <br/>
-                <input type="text" id="username" placeholder={'Username'} onChange={(e) => this.handleChange(e)}/>
-                <br/>
-                <input type="text" id="body" placeholder={'Text here..'} onChange={(e) => this.handleChange(e)}/>
-                <br/>
-            </form>
-            <button id="nappi" onClick={(e) => this.handleClick(e)}>post blog</button>
-            </div>
+            <Grid>  
+                <Row>
+                    <Col sm={2}md={3}>
+                    </Col>
+                    <Col xs={12} sm={8} md={6}>
+                    <div>
+                    <form id="postBlog">
+                        New Blog Post:<br/>
+                        <input type="text" id="title" placeholder={'Title'} onChange={(e) => this.handleChange(e)}/>
+                        <br/>
+                        <input type="text" id="username" placeholder={'Username'} onChange={(e) => this.handleChange(e)}/>
+                        <br/>
+                        <textarea id="body" rows="6" cols="25" placeholder="Kirjoita tähän" onChange={(e) => this.handleChange(e)}></textarea>
+                        <br/>
+                    </form>
+                    <button id="nappi" onClick={(e) => this.handleClick(e)}>post blog</button>
+                    </div>
+                    </Col>
+                </Row>
+            </Grid>
         );
     }
 }
