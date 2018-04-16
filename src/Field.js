@@ -43,14 +43,12 @@ class Field extends Component {
         return (
             <div>
             <form id="postBlog">
-                Otsikko:<br/>
-                <input type="text" id="title" onChange={(e) => this.handleChange(e)}/>
+                New Blog Post:<br/>
+                <input type="text" id="title" placeholder={'Title'} onChange={(e) => this.handleChange(e)}/>
                 <br/>
-                Teksi:<br/>
-                <input type="text" id="body" onChange={(e) => this.handleChange(e)}/>
+                <input type="text" id="username" placeholder={'Username'} onChange={(e) => this.handleChange(e)}/>
                 <br/>
-                Nimimerkki:<br/>
-                <input type="text" id="username" onChange={(e) => this.handleChange(e)}/>
+                <input type="text" id="body" placeholder={'Text here..'} onChange={(e) => this.handleChange(e)}/>
                 <br/>
             </form>
             <button id="nappi" onClick={(e) => this.handleClick(e)}>post blog</button>

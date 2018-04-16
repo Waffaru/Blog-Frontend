@@ -1,10 +1,96 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
 }
 
 #root {
-  background-color:#fff000;
-  font-family:Arial, Helvetica, sans-serif;
+    background-color:#ffffff;
+    font-family:Arial, Helvetica, sans-serif;
+}
+#banner {
+    background-image:url('Pizzalovers blog banner.png');
+    width: 100%;
+    height: 300px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/*Login div */
+#logging   {
+    margin-left:auto;
+    margin-right: 0;
+}
+
+
+#blogPost   {
+
+}
+
+/* Blogpost main mother div */
+#mainBlogpostDiv{
+
+}
+/* Main page blogpost title! */
+#mainBlogpostTitle  {
+}
+/* Main page blogpost username! */
+#mainBlogpostUsername   {
+}
+/* Main page blogpost body! */
+#mainBlogpostBody   {
+}
+
+/* Blogpost opened mother div */
+#openBlogpostDiv{
+
+}
+/* When blogpost is clicked open! */
+#openBlogpostBody   {
+
+}
+/* When blogpost is clicked open! */
+#openBlogpostTitle  {
+
+}
+/* When blogpost is clicked open! */
+#openBlogpostUsername   {
+    font-size: larger;
+    font-style: italic;
+}
+
+
+/* Posting blog div */
+#postBlog{
+
+}
+/* posting blog title field */
+#title  {
+
+}
+/* posting blog username field */
+#username   {
+    font-size: smaller;
+}
+/* posting blog body field */
+#body   {
+    height: 150px;
+}
+
+
+/* Blog post comments mother div */
+#commentDiv{
+
+}
+/* Blog post comments username */
+#commentUsername    {
+    font-style: italic;
+    font-size: larger;
+}
+/* Blog post comments date */
+#commentDate    {
+    font-size: smaller;
+}
+/* Blog post comments body */
+#commentBody    {
+
 }

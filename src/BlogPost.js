@@ -104,23 +104,23 @@ class Blogs extends Component {
             let blogList = this.state.posts;
             var blogP = []
             for(let blog of blogList) {
-                blogP.push(<div>
-                <h2 onClick={(e) => this.openPost(e, blog)}>{blog.title}</h2>
-                <p>{blog.username} @ {blog.date}</p>
-                <p>{blog.body}</p> 
+                blogP.push(<div id={'mainBlogpostDiv'}>
+                <h2 id={'mainBlogpostTitle'} onClick={(e) => this.openPost(e, blog)}>{blog.title}</h2>
+                <p id={'mainBlogpostUsername'}>{blog.username} @ {blog.date}</p>
+                <p id={'mainBlogpostBody'}>{blog.body}</p>
                 <button id={`edit-${blog.id}`}>Edit</button>
                 <button id={`dlt-${blog.id}`}  onClick={(e) => deletePost(blog.id, e)}>Delete</button>
-                <button id={`dislike-${blog.id}`} onClick={(e) => dislikePost(blog.id, e)}> Dislike </button> </div>)
+                </div>)
             }
             return <div>{blogP}</div>
         }
         else {
             console.log(`Hei kato tää!!!!`);
             return (
-                <div>
-                    <h2>{this.state.currentPost.title}</h2>
-                    <p>{this.state.currentPost.username} @ {this.state.currentPost.date}</p>
-                    <p>{this.state.currentPost.body}</p>
+                <div id={'openBlogpostDiv'}>
+                    <h2 id={'openBlogpostTitle'}>{this.state.currentPost.title}</h2>
+                    <p id={'openBlogpostUsername'}>{this.state.currentPost.username} @ {this.state.currentPost.date}</p>
+                    <p id={'openBlogpostBody'}>{this.state.currentPost.body}</p>
                     <button onClick={(e) => this.returnToPostList(e)}>Go back</button>
                     <Comment blogPostId={this.state.currentPost.id}/>
                 </div>

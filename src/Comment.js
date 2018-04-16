@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 /**
  * This component handles all comments of any specified post.
@@ -70,10 +69,10 @@ class Comment extends Component {
         console.log(commentList);
         var commentArr = []
         for(let comment of commentList) {
-            commentArr.push(<div>
-            <p>{comment.username}</p>
-            <p> {comment.date} | {comment.dislikes}</p>
-            <p>{comment.body}</p>
+            commentArr.push(<div id={'commentDiv'}>
+            <p id={'commentUsername'}>{comment.username}</p>
+            <p id={'commentDate'}> {comment.date} | Dislikes {comment.dislikes}</p>
+            <p id={'commentBody'}>{comment.body}</p>
             <button id={`edit-${comment.id}`}>Edit</button>
             <button id={`dlt-${comment.id}`}  onClick={(e) => deletePost(comment.id, e)}>Delete</button>
             <button id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}> Dislike </button> </div>)
