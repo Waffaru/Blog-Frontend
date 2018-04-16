@@ -23,6 +23,13 @@ body {
 #blogMenu   {
 
 }
+.small{
+    background-color: seashell;
+}
+.dislikeButton{
+    height: 20px;
+    width: 2px;
+}
 
 /* Blogpost main mother div */
 #mainBlogpostDiv{
@@ -31,13 +38,13 @@ body {
 }
 /* Main page blogpost title! */
 #mainBlogpostTitle  {
-
-
+    font-size: x-large;
 }
 
 /* Main page blogpost username! */
 #mainBlogpostUsername   {
-
+    font-size: x-small;
+    color: #000;
 }
 /* Main page blogpost body! */
 #mainBlogpostBody   {

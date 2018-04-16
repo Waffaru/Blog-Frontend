@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Grid,Row,Col} from 'react-materialize';
+import {Row,Col,Card,Button} from 'react-materialize';
 import Comment from './Comment';
 
 /**
@@ -108,45 +108,52 @@ class Blogs extends Component {
                 if(this.state.logged) {
                 blogP.push(
                     <Row>
-                        <Col s={12}>
-                            <div id={'mainBlogpostDiv'}>
-                            <h2 id={'mainBlogpostTitle'} onClick={(e) => this.openPost(e, blog)}>{blog.title}</h2>
-                            <p id={'mainBlogpostUsername'}>{blog.username} @ {blog.date}</p>
-                            <p id={'mainBlogpostBody'}>{blog.body}</p>
-                            <button id={`edit-${blog.id}`}>Edit</button>
-                            <button id={`dlt-${blog.id}`}  onClick={(e) => deletePost(blog.id, e)}>Delete</button>
-                            </div>
+                        <Col m={2}l={3}>
+                        </Col>
+                        <Col s={12} m={12} l={12}>
+                            <Button waves='light' id={`edit-${blog.id}`}>Edit</Button>
+                            <Button waves='light' id={`dlt-${blog.id}`}  onClick={(e) => deletePost(blog.id, e)}>Delete</Button>
+                            <Card className='small'
+                                  actions={[<Button waves='light' onClick={(e) => this.openPost(e, blog)}>Comments</Button>]}>
+                                <h1>{blog.title}</h1>
+                                <p>{blog.username}</p>
+                                <p>{blog.body}</p>
+                            </Card>
                         </Col>
                     </Row>
                 )
                 } else {
                     blogP.push(
                         <Row>
-                            <Col s={12}>
-                                <div id={'mainBlogpostDiv'}>
-                                <h2 id={'mainBlogpostTitle'} onClick={(e) => this.openPost(e, blog)}>{blog.title}</h2>
-                                <p id={'mainBlogpostUsername'}>{blog.username} @ {blog.date}</p>
-                                <p id={'mainBlogpostBody'}>{blog.body}</p>
-                                </div>
+                            <Col m={2}l={3}>
+                            </Col>
+                            <Col s={12} m={12} l={12}>
+                                <Card className='small'
+                                actions={[<Button waves='light' onClick={(e) => this.openPost(e, blog)}>Comments</Button>]}>
+                                    <h1>{blog.title}</h1>
+                                    <p>{blog.body}</p>
+                            </Card>
                             </Col>
                         </Row>
                     )                    
                 }
             }
-            return <div><Row><Col m={3}l={4}></Col><Col s={12} m={8} l={6}><h1 id={'blogMenu'}>Blog Menu</h1></Col></Row>{blogP}</div>
+            return <div>{blogP}</div>
         }
         else {
             console.log(`Hei kato tää!!!!`);
             return (
                     <Row>
-                        <Col s={12}>
-                        <div id={'openBlogpostDiv'}>
-                            <h2 id={'openBlogpostTitle'}>{this.state.currentPost.title}</h2>
-                            <p id={'openBlogpostUsername'}>{this.state.currentPost.username} @ {this.state.currentPost.date}</p>
-                            <p id={'openBlogpostBody'}>{this.state.currentPost.body}</p>
-                            <button onClick={(e) => this.returnToPostList(e)}>Go back</button>
+                        <Col m={2}l={3}>
+                        </Col>
+                        <Col s={12} m={12} l={12}>
+                            <Card className='small'
+                                  actions={[<Button waves='light' onClick={(e) => this.returnToPostList(e)}>Go back</Button>]}>
+                                <h1 id={'openBlogpostTitle'}>{this.state.currentPost.title}</h1>
+                                <p id={'openBlogpostUsername'}>{this.state.currentPost.username} @ {this.state.currentPost.date}</p>
+                                <p id={'openBlogpostBody'}>{this.state.currentPost.body}</p>
+                            </Card>
                             <Comment blogPostId={this.state.currentPost.id} logged={this.state.logged}/>
-                        </div>
                         </Col>
                     </Row>
             );
