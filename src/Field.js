@@ -8,7 +8,18 @@ class Field extends Component {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
-        this.state = {title: "", body: "", username: ""};
+        this.state = {title: "", body: "", username: "", logged: false};
+    }
+
+    componentWillReceiveProps(props) {
+        if(props.logged) { 
+            this.setState({logged: true});
+            console.log("Joo")
+        }
+        else {
+            this.setState({logged: false});
+            console.log("ei")
+        }
     }
 
     handleChange(e) {
@@ -41,28 +52,34 @@ class Field extends Component {
     }
 
     render() {
-        return (
-            <Grid>  
-                <Row>
-                    <Col sm={2}md={3}>
-                    </Col>
-                    <Col xs={12} sm={8} md={6}>
-                    <div>
-                    <form id="postBlog">
-                        New Blog Post:<br/>
-                        <input type="text" id="title" placeholder={'Title'} onChange={(e) => this.handleChange(e)}/>
-                        <br/>
-                        <input type="text" id="username" placeholder={'Username'} onChange={(e) => this.handleChange(e)}/>
-                        <br/>
-                        <textarea id="body" rows="6" cols="25" placeholder="Kirjoita tähän" onChange={(e) => this.handleChange(e)}></textarea>
-                        <br/>
-                    </form>
-                    <button id="nappi" onClick={(e) => this.handleClick(e)}>post blog</button>
-                    </div>
-                    </Col>
-                </Row>
-            </Grid>
+        if(this.state.logged) {
+            return (
+                <Grid fluid="true">  
+                    <Row>
+                        <Col sm={2}md={3}>
+                        </Col>
+                        <Col xs={12} sm={8} md={6}>
+                        <div>
+                        <form id="postBlog">
+                            New Blog Post:<br/>
+                            <input type="text" id="title" placeholder={'Title'} onChange={(e) => this.handleChange(e)}/>
+                            <br/>
+                            <input type="text" id="username" placeholder={'Username'} onChange={(e) => this.handleChange(e)}/>
+                            <br/>
+                            <textarea id="body" rows="6" cols="25" placeholder="Kirjoita tähän" onChange={(e) => this.handleChange(e)}></textarea>
+                            <br/>
+                        </form>
+                        <button id="nappi" onClick={(e) => this.handleClick(e)}>post blog</button>
+                        </div>
+                        </Col>
+                    </Row>
+                </Grid>
         );
+        }
+        else{
+            return null;
+        }
+
     }
 }
 

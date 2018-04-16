@@ -8,7 +8,6 @@ import Comment from './Comment';
 
 //ReactDOM.render(<App />, document.getElementById('root'));
 //TODO: Fix Login
-ReactDOM.render(<Login />, document.getElementById('login'));
 ReactDOM.render(<App />, document.getElementById('root'));
 //ReactDOM.render(<Comment />, document.getElementById('root'));
 registerServiceWorker();

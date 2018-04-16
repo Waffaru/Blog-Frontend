@@ -35,12 +35,13 @@ class Login extends Component {
             .then(response => {
                 if(response){
                     this.setState({username: "", password: "", logged: response});
+                    this.logged = true;
+                    this.props.checkLogin();
                 }else{
                     this.setState({logged: response});
                 }
 
             });
-        //TODO TÄHÄN ON SAATAVA SLEEP
         console.log(this.state.logged);
         //document.getElementById("login").reset();
 
@@ -50,16 +51,18 @@ class Login extends Component {
 
     logOut(){
         this.setState({logged: false});
-        //alert(this.logged);
+        this.logged = false;
+        this.props.checkLogin();
     }
     render() {
         if(!this.state.logged){
             return (
-                <grid>
-                    <row>
+                  <div id="banner" role="banner">
+                <Grid>
+                    <Row>
                         <Col sm={2}md={3}>
                         </Col>
-                        <Col xs={12} sm={8} md={6}>
+                        <Col xs={12} sm={12} md={12}>
                             <form>
                                 Username :
                                 <input type="text" id="username" onChange={(e) => this.handleChange(e)}/>
@@ -69,21 +72,23 @@ class Login extends Component {
                                 <input type="submit" id="loginBtn" value="Login" onClick={(e) => this.handleClick(e)}/>
                             </form>
                         </Col>
-                    </row>
-                </grid>
+                    </Row>
+                </Grid>
+                </div>
             );
         }else {
             return (
-                <grid>
-                    <row>
+                <div id="banner" role="banner">
+                <Grid>
+                    <Row>
                         <Col sm={2}md={3}>
                         </Col>
                         <Col xs={12} sm={8} md={6}>
                             <button type="submit" id="logout" onClick={() => this.logOut()}>Logout</button>
                         </Col>
-                    </row>
-                </grid>
-
+                    </Row>
+                </Grid>
+                </div>
             );
         }
 
