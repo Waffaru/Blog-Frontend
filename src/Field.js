@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Grid,Row,Col, Input, Textarea, Button} from 'react-materialize';
+import {Row,Col, Input, Textarea, Button} from 'react-materialize';
 /**
  * This component is used to send new blogposts to the backend.
  * It is a child component of App.js
@@ -45,7 +45,6 @@ class Field extends Component {
             }).then(res => res.json())
             .catch(error => console.error('Error:', error))
             .then(response => console.log('Success:', response));
-            document.getElementById("postBlog").reset();
             this.setState({title: "", body: "", username: ""});
             //Callback function to parent
             this.props.postButtonClicked();
