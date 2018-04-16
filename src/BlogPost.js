@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Comment from './Comment';
+import {Bootstrap, Grid, Row, Col} from 'react-bootstrap';
 
 /**
  * Component that handles blog posts.
@@ -104,26 +105,42 @@ class Blogs extends Component {
             let blogList = this.state.posts;
             var blogP = []
             for(let blog of blogList) {
-                blogP.push(<div id={'mainBlogpostDiv'}>
-                <h2 id={'mainBlogpostTitle'} onClick={(e) => this.openPost(e, blog)}>{blog.title}</h2>
-                <p id={'mainBlogpostUsername'}>{blog.username} @ {blog.date}</p>
-                <p id={'mainBlogpostBody'}>{blog.body}</p>
-                <button id={`edit-${blog.id}`}>Edit</button>
-                <button id={`dlt-${blog.id}`}  onClick={(e) => deletePost(blog.id, e)}>Delete</button>
-                </div>)
+                blogP.push(
+                    <Row>
+                        <Col sm={2}md={3}>
+                        </Col>
+                        <Col xs={12} sm={8} md={6}>
+                            <div id={'mainBlogpostDiv'}>
+                            <h2 id={'mainBlogpostTitle'} onClick={(e) => this.openPost(e, blog)}>{blog.title}</h2>
+                            <p id={'mainBlogpostUsername'}>{blog.username} @ {blog.date}</p>
+                            <p id={'mainBlogpostBody'}>{blog.body}</p>
+                            <button id={`edit-${blog.id}`}>Edit</button>
+                            <button id={`dlt-${blog.id}`}  onClick={(e) => deletePost(blog.id, e)}>Delete</button>
+                            </div>
+                        </Col>
+                    </Row>
+                )
             }
-            return <div>{blogP}</div>
+            return <Grid><div>{blogP}</div></Grid>
         }
         else {
             console.log(`Hei kato tää!!!!`);
             return (
-                <div id={'openBlogpostDiv'}>
-                    <h2 id={'openBlogpostTitle'}>{this.state.currentPost.title}</h2>
-                    <p id={'openBlogpostUsername'}>{this.state.currentPost.username} @ {this.state.currentPost.date}</p>
-                    <p id={'openBlogpostBody'}>{this.state.currentPost.body}</p>
-                    <button onClick={(e) => this.returnToPostList(e)}>Go back</button>
-                    <Comment blogPostId={this.state.currentPost.id}/>
-                </div>
+                <Grid>
+                    <row>
+                        <Col sm={2}md={3}>
+                        </Col>
+                        <Col xs={12} sm={8} md={6}>
+                        <div id={'openBlogpostDiv'}>
+                            <h2 id={'openBlogpostTitle'}>{this.state.currentPost.title}</h2>
+                            <p id={'openBlogpostUsername'}>{this.state.currentPost.username} @ {this.state.currentPost.date}</p>
+                            <p id={'openBlogpostBody'}>{this.state.currentPost.body}</p>
+                            <button onClick={(e) => this.returnToPostList(e)}>Go back</button>
+                            <Comment blogPostId={this.state.currentPost.id}/>
+                        </div>
+                        </Col>
+                    </row>
+                </Grid>
             );
 
         }

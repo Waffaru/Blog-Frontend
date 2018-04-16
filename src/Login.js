@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Bootstrap, Grid, Row, Col} from 'react-bootstrap';
 
 class Login extends Component {
 
@@ -54,18 +55,35 @@ class Login extends Component {
     render() {
         if(!this.state.logged){
             return (
-                <form id="login">
-                    Username :
-                    <input type="text" id="username" onChange={(e) => this.handleChange(e)}/>
-                    Password :
-                    <input type="password" id="password" onChange={(e) => this.handleChange(e)}/>
+                <grid>
+                    <row>
+                        <Col sm={2}md={3}>
+                        </Col>
+                        <Col xs={12} sm={8} md={6}>
+                            <form>
+                                Username :
+                                <input type="text" id="username" onChange={(e) => this.handleChange(e)}/>
+                                Password :
+                                <input type="password" id="password" onChange={(e) => this.handleChange(e)}/>
 
-                    <input type="submit" id="loginBtn" value="Login" onClick={(e) => this.handleClick(e)}/>
-                </form>
+                                <input type="submit" id="loginBtn" value="Login" onClick={(e) => this.handleClick(e)}/>
+                            </form>
+                        </Col>
+                    </row>
+                </grid>
             );
         }else {
             return (
-                <button type="submit" id="logout" onClick={() => this.logOut()}>Logout</button>
+                <grid>
+                    <row>
+                        <Col sm={2}md={3}>
+                        </Col>
+                        <Col xs={12} sm={8} md={6}>
+                            <button type="submit" id="logout" onClick={() => this.logOut()}>Logout</button>
+                        </Col>
+                    </row>
+                </grid>
+
             );
         }
 

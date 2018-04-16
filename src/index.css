@@ -2,7 +2,9 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-        background-image:url('background-image.jpg');
+    background-image:url('Index_backend.png');
+    width: 100%;
+    background-size: 100%;
 }
 
 #root {
@@ -15,6 +17,9 @@ body {
     height: 300px;
     background-repeat: no-repeat;
     background-size: cover;
+}
+div{
+
 }
 /*Login div */
 #login  {
@@ -29,15 +34,19 @@ body {
 /* Blogpost main mother div */
 #mainBlogpostDiv{
 
+
 }
 /* Main page blogpost title! */
 #mainBlogpostTitle  {
+
 }
 /* Main page blogpost username! */
 #mainBlogpostUsername   {
+
 }
 /* Main page blogpost body! */
 #mainBlogpostBody   {
+
 }
 
 /* Blogpost opened mother div */
