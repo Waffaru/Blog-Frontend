@@ -22,7 +22,7 @@ class Blogs extends Component {
         let url = 'http://localhost:8080/blogpost'
 
         fetch(url).then((response) => response.json()).then((blogList) => {
-                            this.setState({posts: blogList});
+                            this.setState({posts: blogList, logged: false});
             console.log(this.state.posts);
         })
     }
@@ -37,7 +37,7 @@ class Blogs extends Component {
             this.fetchPosts();
         }
         else {
-            console.log("false");
+            this.setState({logged: props.logged});
         }
     }
 
@@ -105,6 +105,7 @@ class Blogs extends Component {
             let blogList = this.state.posts;
             var blogP = []
             for(let blog of blogList) {
+                if(this.state.logged) {
                 blogP.push(
                     <Row>
                         <Col sm={2}md={3}>
@@ -120,6 +121,21 @@ class Blogs extends Component {
                         </Col>
                     </Row>
                 )
+                } else {
+                    blogP.push(
+                        <Row>
+                            <Col sm={2}md={3}>
+                            </Col>
+                            <Col xs={12} sm={8} md={6}>
+                                <div id={'mainBlogpostDiv'}>
+                                <h2 id={'mainBlogpostTitle'} onClick={(e) => this.openPost(e, blog)}>{blog.title}</h2>
+                                <p id={'mainBlogpostUsername'}>{blog.username} @ {blog.date}</p>
+                                <p id={'mainBlogpostBody'}>{blog.body}</p>
+                                </div>
+                            </Col>
+                        </Row>
+                    )                    
+                }
             }
             return <Grid><div>{blogP}</div></Grid>
         }

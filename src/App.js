@@ -27,7 +27,7 @@ class App extends Component {
       <div>
         <Login checkLogin={this.checkLogin}/>
         <Field postButtonClicked={this.updateUI}  logged={this.state.logged}/>
-        <BlogPost update={this.state.update}/>
+        <BlogPost update={this.state.update} logged={this.state.logged}/>
       </div>
     );
   }
