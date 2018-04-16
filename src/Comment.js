@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Row,Col,Card,Button,Icon} from 'react-materialize';
 /**
  * This component handles all comments of any specified post.
  * It is used to render all the comments of a specified post.
@@ -74,21 +75,46 @@ class Comment extends Component {
         var commentArr = []
         if(this.state.logged) {
             for(let comment of commentList) {
-                commentArr.push(<div id={'commentDiv'}>
+                commentArr.push(
+                    <Row>
+                        <Col m={2}l={3}>
+                        </Col>
+                        <Col s={12} m={12} l={12}>
+                            <Card className='small'>
+                                <p id={'commentUsername'}>{comment.username}</p>
+                                <p id={'commentDate'}> {comment.date} <Button className='dislikeButton' id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}> Dislike </Button>{comment.dislikes}</p>
+                                <p id={'commentBody'}>{comment.body}</p>
+                            </Card>
+                            <Button waves='light' id={`edit-${comment.id}`}>Edit</Button>
+                            <Button waves='light' id={`dlt-${comment.id}`}  onClick={(e) => deletePost(comment.id, e)}>Delete</Button>
+                        </Col>
+                    </Row>
+                    /*<div id={'commentDiv'}>
                 <p id={'commentUsername'}>{comment.username}</p>
                 <p id={'commentDate'}> {comment.date} | Dislikes {comment.dislikes}</p>
                 <p id={'commentBody'}>{comment.body}</p>
-                <button id={`edit-${comment.id}`}>Edit</button>
-                <button id={`dlt-${comment.id}`}  onClick={(e) => deletePost(comment.id, e)}>Delete</button>
-                <button id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}> Dislike </button> </div>)
+
+                <button id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}> Dislike </button> </div>*/)
             }            
         } else {
             for(let comment of commentList) {
-                commentArr.push(<div id={'commentDiv'}>
+                commentArr.push(
+                    <Row>
+                        <Col m={2}l={3}>
+                        </Col>
+                        <Col s={12} m={12} l={12}>
+                            <Card className='commentCards'>
+                                <p id={'commentUsername'}>{comment.username}</p>
+                                <p id={'commentDate'}> {comment.date} <Button className='dislikeButton' id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}> Dislike </Button>{comment.dislikes}</p>
+                                <p id={'commentBody'}>{comment.body}</p>
+                            </Card>
+                        </Col>
+                    </Row>
+                    /*<div id={'commentDiv'}>
                 <p id={'commentUsername'}>{comment.username}</p>
                 <p id={'commentDate'}> {comment.date} | Dislikes {comment.dislikes}</p>
                 <p id={'commentBody'}>{comment.body}</p>
-                <button id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}> Dislike </button></div>)
+                <button id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}> Dislike </button></div>*/)
             }            
         }
 
