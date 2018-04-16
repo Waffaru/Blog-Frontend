@@ -21,16 +21,20 @@ body {
 div{
 
 }
-/*Login div */
-/*@media only screen and (min-width: 520px) {
-    #login  {
-      display:flex;
-      justify-content: flex-end;
-    }
-}*/
 
+#gridClass {
+    background-image: url('Index_backend.png');
+    background-attachment: fixed;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: multiply;
+}
+
+/*Login div */
 #login {
-    height:100px;
+    display: flex;
+    justify-content: flex-end;
 }
 
 
@@ -47,6 +51,11 @@ div{
 #mainBlogpostTitle  {
 
 }
+#blogMenu   {
+    font-size: 130px;
+    font-family: 'Dancing Script', cursive;
+}
+
 /* Main page blogpost username! */
 #mainBlogpostUsername   {
 

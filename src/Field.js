@@ -54,7 +54,7 @@ class Field extends Component {
     render() {
         if(this.state.logged) {
             return (
-                <Grid fluid="true">  
+                <Grid id={'gridClass'} fluid={true}>
                     <Row>
                         <Col sm={2}md={3}>
                         </Col>

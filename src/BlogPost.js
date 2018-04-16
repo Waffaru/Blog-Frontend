@@ -137,13 +137,13 @@ class Blogs extends Component {
                     )                    
                 }
             }
-            return <Grid><div>{blogP}</div></Grid>
+            return <Grid id={'gridClass'} fluid={true}><div><Row><Col sm={3}md={4}></Col><Col xs={12} sm={8} md={6}><h1 id={'blogMenu'}>Blog Menu</h1></Col></Row>{blogP}</div></Grid>
         }
         else {
             console.log(`Hei kato tää!!!!`);
             return (
-                <Grid>
-                    <row>
+                <Grid id={'gridClass'}fluid={true}>
+                    <Row>
                         <Col sm={2}md={3}>
                         </Col>
                         <Col xs={12} sm={8} md={6}>
@@ -155,7 +155,7 @@ class Blogs extends Component {
                             <Comment blogPostId={this.state.currentPost.id}/>
                         </div>
                         </Col>
-                    </row>
+                    </Row>
                 </Grid>
             );
 
