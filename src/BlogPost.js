@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Row,Col,Card,Button,CardTitle,CardPanel} from 'react-materialize';
+import {Row,Col,Card,Button,CardTitle,CardPanel,Input,Icon} from 'react-materialize';
 import Comment from './Comment';
 
 /**
@@ -144,7 +144,16 @@ class Blogs extends Component {
                     )                    
                 }
             }
-            return <div>{blogP}</div>
+            return <div>
+                <Row>
+                <Col m={1}l={3}>
+                </Col>
+                <Col s={12} m={10} l={6}>
+                    <Input l={12} id={'searchBar'}  placeholder={'Search'} onChange={(e) => this.handleChange(e)}><Icon tiny>search</Icon></Input>
+                </Col>
+            </Row>
+                {blogP}
+                </div>
         }
         //A single post has been clicked
         else {
@@ -152,7 +161,7 @@ class Blogs extends Component {
             return (
                 <span>
                     <Row>
-                        <Col s={12} m={5}>
+                        <Col s={9} m={5}>
                             <CardPanel className="testi">
                                 <span></span>
                             </CardPanel>
