@@ -12,6 +12,7 @@ class Blogs extends Component {
         this.fetchPosts = this.fetchPosts.bind(this);
         this.openPost = this.openPost.bind(this);
         this.returnToPostList = this.returnToPostList.bind(this);
+        this.handleClick = this.handleClick.bind(this);
         this.state = {posts: [], postIsClicked: false, currentPost: {}};
     }
 
@@ -66,6 +67,10 @@ class Blogs extends Component {
     returnToPostList(e) {
         this.setState({postIsClicked: false, currentPost: {}});
         this.props.arePostsShowing();
+    }
+
+    handleChange(e) {
+        //TODO shit here? or am i lost with this, i might be but atleast i wrote this here
     }
 
     /**
