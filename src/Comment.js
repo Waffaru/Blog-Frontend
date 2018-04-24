@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Row,Col,Card,Button,Icon} from 'react-materialize';
+import {Row,Col,Card,Button} from 'react-materialize';
 /**
  * This component handles all comments of any specified post.
  * It is used to render all the comments of a specified post.
