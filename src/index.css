@@ -24,11 +24,18 @@ body {
 
 }
 .small{
-    background-color: seashell;
+    width: 60%;
 }
 .dislikeButton{
     height: 20px;
     width: 2px;
+}
+.testi{
+    background-image: url(http://www.pizzaromaaventura.com/media/wysiwyg/pizza/pizzaromabanner.jpg);
+    height: 400px;
+}
+#korttijuttu{
+    width: 80%;
 }
 
 /* Blogpost main mother div */
@@ -36,6 +43,7 @@ body {
 
 
 }
+
 /* Main page blogpost title! */
 #mainBlogpostTitle  {
     font-size: x-large;

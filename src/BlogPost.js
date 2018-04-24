@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Row,Col,Card,Button} from 'react-materialize';
+import {Row,Col,Card,Button,CardTitle,CardPanel} from 'react-materialize';
 import Comment from './Comment';
 
 /**
@@ -114,7 +114,7 @@ class Blogs extends Component {
                             <Button waves='light' id={`edit-${blog.id}`}>Edit</Button>
                             <Button waves='light' id={`dlt-${blog.id}`}  onClick={(e) => deletePost(blog.id, e)}>Delete</Button>
                             <Card className='small'
-                                  actions={[<Button waves='light' onClick={(e) => this.openPost(e, blog)}>Comments</Button>]}>
+                                  actions={[<Button waves='light' onClick={(e) => this.openPost(e, blog)}>Read more</Button>]}>
                                 <h1>{blog.title}</h1>
                                 <p>{blog.username}</p>
                                 <p>{blog.body}</p>
@@ -128,10 +128,9 @@ class Blogs extends Component {
                             <Col m={2}l={3}>
                             </Col>
                             <Col s={12} m={12} l={12}>
-                                <Card className='small'
-                                actions={[<Button waves='light' onClick={(e) => this.openPost(e, blog)}>Comments</Button>]}>
-                                    <h1>{blog.title}</h1>
-                                    <p>{blog.body}</p>
+                                <Card className='small' header={<CardTitle image='http://www.pizzaromaaventura.com/media/wysiwyg/pizza/pizzaromabanner.jpg'>{blog.title}</CardTitle>}
+                                actions={[<Button nameClass='readMoreButton' waves='light' onClick={(e) => this.openPost(e, blog)}>Read more</Button>]}>
+                                    {blog.body}
                             </Card>
                             </Col>
                         </Row>
@@ -143,7 +142,22 @@ class Blogs extends Component {
         else {
             console.log(`Hei kato tää!!!!`);
             return (
-                    <Row>
+                <Row>
+                    <Col s={12} m={5}>
+                        <CardPanel className="testi">
+                            <span></span>
+                        </CardPanel>
+                        <Button waves='light' onClick={(e) => this.returnToPostList(e)}>Go back</Button>
+                    </Col>
+                    <Col s={12} m={7}>
+                        <h2>{this.state.currentPost.title}</h2>
+                        <p id={'korttijuttu'}>{this.state.currentPost.body}|||| {this.state.currentPost.username}</p>
+
+                    </Col>
+                    <Comment blogPostId={this.state.currentPost.id} logged={this.state.logged}/>
+                </Row>
+
+                    /*<Row>
                         <Col m={2}l={3}>
                         </Col>
                         <Col s={12} m={12} l={12}>
@@ -155,7 +169,7 @@ class Blogs extends Component {
                             </Card>
                             <Comment blogPostId={this.state.currentPost.id} logged={this.state.logged}/>
                         </Col>
-                    </Row>
+                    </Row>*/
             );
 
         }

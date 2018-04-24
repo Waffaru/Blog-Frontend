@@ -82,7 +82,7 @@ class Comment extends Component {
                         <Col s={12} m={12} l={12}>
                             <Card className='small'>
                                 <p id={'commentUsername'}>{comment.username}</p>
-                                <p id={'commentDate'}> {comment.date} <Button className='dislikeButton' id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}> Dislike </Button>{comment.dislikes}</p>
+                                <p id={'commentDate'}> {comment.date} <Button className='dislikeButton' id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}> Dislike </Button>{ comment.dislikes}</p>
                                 <p id={'commentBody'}>{comment.body}</p>
                             </Card>
                             <Button waves='light' id={`edit-${comment.id}`}>Edit</Button>
@@ -105,7 +105,7 @@ class Comment extends Component {
                         <Col s={12} m={12} l={12}>
                             <Card className='commentCards'>
                                 <p id={'commentUsername'}>{comment.username}</p>
-                                <p id={'commentDate'}> {comment.date} <Button className='dislikeButton' id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}> Dislike </Button>{comment.dislikes}</p>
+                                <p id={'commentDate'}> {comment.date} <Button className='dislikeButton' id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}> Dislike </Button>{ comment.dislikes}</p>
                                 <p id={'commentBody'}>{comment.body}</p>
                             </Card>
                         </Col>
