@@ -55,6 +55,7 @@ class Blogs extends Component {
         console.log(blog);
         console.log(blog.id);
         this.setState({postIsClicked: true, currentPost: blog})
+        this.props.arePostsShowing();
     }
 
     /**
@@ -64,6 +65,7 @@ class Blogs extends Component {
      */
     returnToPostList(e) {
         this.setState({postIsClicked: false, currentPost: {}});
+        this.props.arePostsShowing();
     }
 
     /**

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Row,Col,Card,Button} from 'react-materialize';
+import {Row,Col,Card,Button, Icon} from 'react-materialize';
 /**
  * This component handles all comments of any specified post.
  * It is used to render all the comments of a specified post.
@@ -10,7 +10,7 @@ class Comment extends Component {
     constructor(props) {
       super(props);
       this.fetchComments = this.fetchComments.bind(this);
-      this.state = {comments: [], blogPostId: this.props.blogPostId, logged: false};
+      this.state = {comments: [], blogPostId: this.props.blogPostId, logged: props.logged};
     }
 
     /**
@@ -30,7 +30,10 @@ class Comment extends Component {
     }
 
     componentWillReceiveProps(props) {
-        this.setState({logged: props.logged});
+        if(props.logged != undefined) {
+            console.log("Is props logged? " + props.logged);
+            this.setState({logged: props.logged});
+        }
     }    
   
     /**
@@ -80,21 +83,14 @@ class Comment extends Component {
                         <Col m={2}l={3}>
                         </Col>
                         <Col s={12} m={12} l={6}>
-                            <Card className='small'>
+                            <Card className='small' actions={[<a href='#' id={`edit-${comment.id}`}>Edit</a>, <a href='#' id={`dlt-${comment.id}`}  onClick={(e) => deletePost(comment.id, e)}>Delete</a>]}>
                                 <p id={'commentUsername'}>{comment.username}</p>
-                                <p id={'commentDate'}> {comment.date} <Button className='dislikeButton' id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}> Dislike </Button>{ comment.dislikes}</p>
+                                <p id={'commentDate'}> {comment.date} { comment.dislikes}
+                                <Button floating small className='red' waves='light' icon='thumb_down'  id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}>  </Button> </p>
                                 <p id={'commentBody'}>{comment.body}</p>
                             </Card>
-                            <Button waves='light' id={`edit-${comment.id}`}>Edit</Button>
-                            <Button waves='light' id={`dlt-${comment.id}`}  onClick={(e) => deletePost(comment.id, e)}>Delete</Button>
                         </Col>
-                    </Row>
-                    /*<div id={'commentDiv'}>
-                <p id={'commentUsername'}>{comment.username}</p>
-                <p id={'commentDate'}> {comment.date} | Dislikes {comment.dislikes}</p>
-                <p id={'commentBody'}>{comment.body}</p>
-
-                <button id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}> Dislike </button> </div>*/)
+                    </Row>);
             }            
         } else {
             for(let comment of commentList) {
@@ -105,16 +101,12 @@ class Comment extends Component {
                         <Col s={12} m={12} l={6}>
                             <Card className='commentCards'>
                                 <p id={'commentUsername'}>{comment.username}</p>
-                                <p id={'commentDate'}> {comment.date} <Button className='dislikeButton' id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}> Dislike </Button>{ comment.dislikes}</p>
+                                <p id={'commentDate'}> {comment.date} { comment.dislikes}
+                                <Button floating small className='red' waves='light' icon='thumb_down'  id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}>  </Button> </p>
                                 <p id={'commentBody'}>{comment.body}</p>
                             </Card>
                         </Col>
-                    </Row>
-                    /*<div id={'commentDiv'}>
-                <p id={'commentUsername'}>{comment.username}</p>
-                <p id={'commentDate'}> {comment.date} | Dislikes {comment.dislikes}</p>
-                <p id={'commentBody'}>{comment.body}</p>
-                <button id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}> Dislike </button></div>*/)
+                    </Row>);
             }            
         }
 

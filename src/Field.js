@@ -8,18 +8,29 @@ class Field extends Component {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
-        this.state = {title: "", body: "", username: "", logged: false};
+        this.state = {title: "", body: "", username: "", logged: false, allPosts: true};
         this.userField = React.createRef();
     }
 
     componentWillReceiveProps(props) {
-        if(props.logged) { 
-            this.setState({logged: true});
-            console.log("Joo")
+        console.log(props);
+        if(props.logged != undefined) {
+            if(props.logged) { 
+                this.setState({logged: true});
+                console.log("Joo")
+            }
+            else {
+                this.setState({logged: false});
+                console.log("ei")
+            }
         }
-        else {
-            this.setState({logged: false});
-            console.log("ei")
+        if(props.allPosts != undefined) {
+            if(props.allPosts) {
+                this.setState({allPosts: true})
+            }
+             else {
+                this.setState({allPosts: false})
+            }
         }
     }
 
@@ -52,7 +63,7 @@ class Field extends Component {
     }
 
     render() {
-        if(this.state.logged) {
+        if(this.state.logged && this.state.allPosts) {
             var margin = {
                 marginLeft: "0.75%"
             }
