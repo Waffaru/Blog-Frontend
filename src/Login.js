@@ -59,12 +59,12 @@ class Login extends Component {
             return (
                     <Row>
                         <Col l={12}>
-                            <Navbar brand={'Pizza Lovers Blog'} right>
-                                    <Input s={4} type="text" id="username" label="Username" onChange={(e) => this.handleChange(e)}/>
+                            <Navbar id="navBar" brand={'Pizza Lovers Blog'} right>
+                                    <Input className="logField" s={4} type="text" id="username" label="Username" onChange={(e) => this.handleChange(e)}/>
 
-                                    <Input s={5} type="password" id="password" label="Password" onChange={(e) => this.handleChange(e)}/>
+                                    <Input className="logField" s={5} type="password" id="password" label="Password" onChange={(e) => this.handleChange(e)}/>
 
-                                    <Button waves='light' s={3} type="submit" id="loginBtn" onClick={(e) => this.handleClick(e)}>Login</Button>
+                                    <Button className="logButton" waves='light' s={3} type="submit" id="loginBtn" onClick={(e) => this.handleClick(e)}>Login</Button>
                             </Navbar>
                         </Col>
                     </Row>
@@ -73,13 +73,13 @@ class Login extends Component {
             return (
                     <Row>
                         <Col l={12}>
-                            <Navbar brand={'Pizza Lovers Blog'} right>
+                            <Navbar id="navBar" brand={'Pizza Lovers Blog'} right>
                                     <Row>
                                     <Col l={6}>
                                     Welcome {this.state.username}!
                                     </Col>
                                     <Col l={6}>
-                                    <Button waves='light' type="submit" id="logout" onClick={() => this.logOut()}>Logout</Button>
+                                    <Button className="logButton" waves='light' type="submit" id="logout" onClick={() => this.logOut()}>Logout</Button>
                                     </Col>
                                     </Row>
                             </Navbar>

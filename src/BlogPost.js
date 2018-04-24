@@ -12,6 +12,7 @@ class Blogs extends Component {
         this.fetchPosts = this.fetchPosts.bind(this);
         this.openPost = this.openPost.bind(this);
         this.returnToPostList = this.returnToPostList.bind(this);
+        this.sleep = this.sleep.bind(this);
         this.state = {posts: [], postIsClicked: false, currentPost: {}};
     }
 
@@ -54,7 +55,7 @@ class Blogs extends Component {
     openPost(e, blog) {
         console.log(blog);
         console.log(blog.id);
-        this.setState({postIsClicked: true, currentPost: blog})
+        this.setState({postIsClicked: true, currentPost: blog, searching: false})
         this.props.arePostsShowing();
     }
 
@@ -69,8 +70,37 @@ class Blogs extends Component {
     }
 
     handleChange(e) {
+        console.log("Value: " + e.target.value);
+        console.log("Inside Handle change")
+        let tempBlogList1 = this.state.posts;
+        let finalBlogList = [];
+        if(e.target.value === '') {
+            
+           console.log("Empty")
+           this.setState({searching: false, searchPosts: this.state.posts});
+        } else {
+            console.log("Not empty")
+            for(let blog of tempBlogList1) {
+                let blogBody = blog.body.toLowerCase();
+                let blogTitle = blog.title.toLowerCase();
+                let blogUser = blog.username.toLowerCase();
+                if(blogBody.includes(e.target.value.toLowerCase()) || blogTitle.includes(e.target.value.toLowerCase()) || blogUser.includes(e.target.value.toLowerCase())) {
+                    finalBlogList.push(blog);
+                }
+            }
+            if(finalBlogList != undefined) {
+                console.log(finalBlogList);
+                this.setState({searching: true, searchPosts: finalBlogList});
+            } else {
+                console.log("Nothing found");
+            }
+        }
+
+
         //TODO shit here? or am i lost with this, i might be but atleast i wrote this here
     }
+
+    sleep(ms) {return new Promise(resolve => setTimeout(resolve, ms));}   z
 
     /**
      * Renders either all posts or just a single post.
@@ -81,8 +111,7 @@ class Blogs extends Component {
      */
     render() {
         let _this = this;
-
-        function sleep(ms) {return new Promise(resolve => setTimeout(resolve, ms));}            
+    
         function deletePost(id, e) {
             e.preventDefault();
             console.log('Click');
@@ -91,7 +120,7 @@ class Blogs extends Component {
             fetch(url, {
             method: 'DELETE'
             }).then(response => response.json()).then();
-            sleep(100).then(() => {
+            this.sleep(100).then(() => {
                 fetch(`http://localhost:8080/blogpost`).then((response) => response.json()).then((blogList) => {
                             _this.setState({posts: blogList});
                 console.log(_this.state.posts);
@@ -109,12 +138,18 @@ class Blogs extends Component {
         
         //If a post has NOT been clicked, go inside this loop
         if(!this.state.postIsClicked) {
-            let blogList = this.state.posts;
-            var blogP = []
+                var blogList = this.state.posts;
+                var blogP = []
+            if(this.state.searching) {
+                blogList = this.state.searchPosts
+                blogP = []
+            } 
             for(let blog of blogList) {
                 //If the user is currently logged in as admin
                 var postBody = blog.body
-                postBody = postBody.substring(0,postBody.length /3) + "...";
+                if(postBody.length >= 100) {
+                    postBody = postBody.substring(0,postBody.length /3) + "...";
+                }
                 if(this.state.logged) {
                 blogP.push(
                     <Row>
@@ -125,7 +160,6 @@ class Blogs extends Component {
                                 actions={[<Button nameClass='readMoreButton' waves='light' onClick={(e) => this.openPost(e, blog)}>Read more</Button>,
                                 <Button waves='light' id={`edit-${blog.id}`}>Edit</Button>,
                                 <Button waves='light' id={`dlt-${blog.id}`}  onClick={(e) => deletePost(blog.id, e)}>Delete</Button>  ]}>
-                                <h1>{blog.title}</h1>
                                 <p>{blog.username}</p>
                                 <p>{postBody}</p>
                             </Card>
@@ -153,7 +187,7 @@ class Blogs extends Component {
                 <Col m={1}l={3}>
                 </Col>
                 <Col s={12} m={10} l={6}>
-                    <Input l={12} id={'searchBar'}  placeholder={'Search'} onChange={(e) => this.handleChange(e)}><Icon tiny>search</Icon></Input>
+                    <Input s={12} id={'searchBar'}  placeholder={'Search'} onChange={(e) => this.handleChange(e)}><Icon tiny>search</Icon></Input>
                 </Col>
             </Row>
                 {blogP}

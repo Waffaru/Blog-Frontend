@@ -116,3 +116,25 @@ body {
 #commentBody    {
 
 }
+
+#navBar {
+    background-color:#1C868F
+}
+
+.logButton {
+    background-color:#6d4c41;
+}
+
+.logButton:hover {
+    background-color:#9c786c;
+}
+
+.logField {
+    /*background-color:#ffffff !important;
+    color:#000 !important;
+    border: 1px solid gray !important;
+    width:50% !important;
+    border-radius: 5px !important;
+    height:20px !important;*/
+
+}
