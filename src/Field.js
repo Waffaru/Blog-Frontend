@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Row,Col, Input, Textarea, Button} from 'react-materialize';
+import {Row,Col, Input, Button} from 'react-materialize';
 /**
  * This component is used to send new blogposts to the backend.
  * It is a child component of App.js
