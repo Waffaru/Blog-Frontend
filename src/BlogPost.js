@@ -12,7 +12,6 @@ class Blogs extends Component {
         this.fetchPosts = this.fetchPosts.bind(this);
         this.openPost = this.openPost.bind(this);
         this.returnToPostList = this.returnToPostList.bind(this);
-        this.handleClick = this.handleClick.bind(this);
         this.state = {posts: [], postIsClicked: false, currentPost: {}};
     }
 
