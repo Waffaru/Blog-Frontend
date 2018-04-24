@@ -101,20 +101,22 @@ class Blogs extends Component {
             fetch(url);     
         }  
         
+        //If a post has NOT been clicked, go inside this loop
         if(!this.state.postIsClicked) {
             let blogList = this.state.posts;
             var blogP = []
             for(let blog of blogList) {
+                //If the user is currently logged in as admin
                 if(this.state.logged) {
                 blogP.push(
                     <Row>
                         <Col m={2}l={3}>
                         </Col>
-                        <Col s={12} m={12} l={12}>
+                        <Col s={12} m={12} l={9}>
                             <Button waves='light' id={`edit-${blog.id}`}>Edit</Button>
                             <Button waves='light' id={`dlt-${blog.id}`}  onClick={(e) => deletePost(blog.id, e)}>Delete</Button>
-                            <Card className='small'
-                                  actions={[<Button waves='light' onClick={(e) => this.openPost(e, blog)}>Read more</Button>]}>
+                            <Card className='small' header={<CardTitle image='http://www.pizzaromaaventura.com/media/wysiwyg/pizza/pizzaromabanner.jpg'>{blog.title}</CardTitle>}
+                                actions={[<Button nameClass='readMoreButton' waves='light' onClick={(e) => this.openPost(e, blog)}>Read more</Button>]}>
                                 <h1>{blog.title}</h1>
                                 <p>{blog.username}</p>
                                 <p>{blog.body}</p>
@@ -122,12 +124,13 @@ class Blogs extends Component {
                         </Col>
                     </Row>
                 )
+                //User is not currently logged in as admin
                 } else {
                     blogP.push(
                         <Row>
                             <Col m={2}l={3}>
                             </Col>
-                            <Col s={12} m={12} l={12}>
+                            <Col s={12} m={12} l={9}>
                                 <Card className='small' header={<CardTitle image='http://www.pizzaromaaventura.com/media/wysiwyg/pizza/pizzaromabanner.jpg'>{blog.title}</CardTitle>}
                                 actions={[<Button nameClass='readMoreButton' waves='light' onClick={(e) => this.openPost(e, blog)}>Read more</Button>]}>
                                     {blog.body}
@@ -139,23 +142,29 @@ class Blogs extends Component {
             }
             return <div>{blogP}</div>
         }
+        //A single post has been clicked
         else {
             console.log(`Hei kato tää!!!!`);
             return (
-                <Row>
-                    <Col s={12} m={5}>
-                        <CardPanel className="testi">
-                            <span></span>
-                        </CardPanel>
-                        <Button waves='light' onClick={(e) => this.returnToPostList(e)}>Go back</Button>
-                    </Col>
-                    <Col s={12} m={7}>
-                        <h2>{this.state.currentPost.title}</h2>
-                        <p id={'korttijuttu'}>{this.state.currentPost.body}|||| {this.state.currentPost.username}</p>
+                <span>
+                    <Row>
+                        <Col s={12} m={5}>
+                            <CardPanel className="testi">
+                                <span></span>
+                            </CardPanel>
+                            <Button waves='light' onClick={(e) => this.returnToPostList(e)}>Go back</Button>
+                        </Col>
+                        <Col s={12} m={7}>
+                            <h2>{this.state.currentPost.title}</h2>
+                            <p id={'korttijuttu'}>{this.state.currentPost.body}|||| {this.state.currentPost.username}</p>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Comment blogPostId={this.state.currentPost.id} logged={this.state.logged}/>
+                    </Row>
+                </span>
 
-                    </Col>
-                    <Comment blogPostId={this.state.currentPost.id} logged={this.state.logged}/>
-                </Row>
+                
 
                     /*<Row>
                         <Col m={2}l={3}>

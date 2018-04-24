@@ -9,7 +9,7 @@ class App extends Component {
     super(props);
     this.updateUI = this.updateUI.bind(this);
     this.checkLogin = this.checkLogin.bind(this);
-    this.state = {update: false, logged: false};
+    this.state = {update: false, logged: false, allPosts: true};
   }
   updateUI() {
     this.setState({update: true});
@@ -22,12 +22,16 @@ class App extends Component {
     }
   }
 
+  arePostsShowing(e, props) {
+    
+  }
+
   render() {
     return (
       <div>
         <Login checkLogin={this.checkLogin}/>
-        <Field postButtonClicked={this.updateUI}  logged={this.state.logged}/>
-        <BlogPost update={this.state.update} logged={this.state.logged}/>
+        <Field postButtonClicked={this.updateUI}  logged={this.state.logged} allPosts={this.state.allPosts} />
+        <BlogPost update={this.state.update} logged={this.state.logged} areAllPostsShowing={this.arePostsShowing}/>
       </div>
     );
   }

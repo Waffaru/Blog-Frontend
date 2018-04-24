@@ -79,7 +79,7 @@ class Comment extends Component {
                     <Row>
                         <Col m={2}l={3}>
                         </Col>
-                        <Col s={12} m={12} l={12}>
+                        <Col s={12} m={12} l={6}>
                             <Card className='small'>
                                 <p id={'commentUsername'}>{comment.username}</p>
                                 <p id={'commentDate'}> {comment.date} <Button className='dislikeButton' id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}> Dislike </Button>{ comment.dislikes}</p>
@@ -102,7 +102,7 @@ class Comment extends Component {
                     <Row>
                         <Col m={2}l={3}>
                         </Col>
-                        <Col s={12} m={12} l={12}>
+                        <Col s={12} m={12} l={6}>
                             <Card className='commentCards'>
                                 <p id={'commentUsername'}>{comment.username}</p>
                                 <p id={'commentDate'}> {comment.date} <Button className='dislikeButton' id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}> Dislike </Button>{ comment.dislikes}</p>
