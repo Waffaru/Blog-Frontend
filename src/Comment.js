@@ -83,10 +83,10 @@ class Comment extends Component {
                         <Col m={2}l={3}>
                         </Col>
                         <Col s={12} m={12} l={6}>
-                            <Card className='small' actions={[<a href='#' id={`edit-${comment.id}`}>Edit</a>, <a href='#' id={`dlt-${comment.id}`}  onClick={(e) => deletePost(comment.id, e)}>Delete</a>]}>
+                            <Card actions={[<a href='#' id={`edit-${comment.id}`}>Edit</a>, <a href='#' id={`dlt-${comment.id}`}  onClick={(e) => deletePost(comment.id, e)}>Delete</a>]}>
                                 <p id={'commentUsername'}>{comment.username}</p>
                                 <p id={'commentDate'}> {comment.date} { comment.dislikes}
-                                <Button floating small className='red' waves='light' icon='thumb_down'  id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}>  </Button> </p>
+                                <Button floating className='red' waves='light' icon='thumb_down' id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}>  </Button> </p>
                                 <p id={'commentBody'}>{comment.body}</p>
                             </Card>
                         </Col>
@@ -99,10 +99,10 @@ class Comment extends Component {
                         <Col m={2}l={3}>
                         </Col>
                         <Col s={12} m={12} l={6}>
-                            <Card className='commentCards'>
+                            <Card>
                                 <p id={'commentUsername'}>{comment.username}</p>
                                 <p id={'commentDate'}> {comment.date} { comment.dislikes}
-                                <Button floating small className='red' waves='light' icon='thumb_down'  id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}>  </Button> </p>
+                                <Button tooltip="dislike" floating className='red' waves='light' icon='thumb_down'  id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}>  </Button> </p>
                                 <p id={'commentBody'}>{comment.body}</p>
                             </Card>
                         </Col>
