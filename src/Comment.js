@@ -110,7 +110,7 @@ class Comment extends Component {
                         <Col m={2}l={2}>
                         </Col>
                         <Col s={12} m={12} l={8}>
-                            <Card actions={[<a href='#' id={`edit-${comment.id}`}>Edit</a>, <a href='#' id={`dlt-${comment.id}`}  onClick={(e) => deletePost(comment.id, e)}>Delete</a>]}>
+                            <Card actions={[<a href='#' id={`dlt-${comment.id}`}  onClick={(e) => deletePost(comment.id, e)}>Delete</a>]}>
                                 <p id={'commentUsername'}>{comment.username}</p>
                                 <p id={'commentDate'}> {comment.date} { comment.dislikes}
                                 <Button floating className='red' waves='light' icon='thumb_down' id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}>  </Button> </p>
@@ -139,7 +139,7 @@ class Comment extends Component {
 
         return <div>
             <Row>
-                <Col m={2}l={2}>
+               <Col m={2}l={2}>
                 </Col>
                 <Col s={12} m={12} l={8}>
                     <p>Post comment</p>

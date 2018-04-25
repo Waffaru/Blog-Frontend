@@ -75,6 +75,9 @@ body {
 
 
 }
+#editBlogBody{
+    z-index: -1;
+}
 /* When blogpost is clicked open! */
 #openBlogpostUsername   {
     font-size: larger;

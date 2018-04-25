@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import {Row,Col,Card,Button,CardTitle,CardPanel,Input,Icon} from 'react-materialize';
+import React, {Component} from 'react';
+import {Row, Col, Card, Button, CardTitle, CardPanel, Input, Icon} from 'react-materialize';
 import Comment from './Comment';
 
 /**
@@ -14,7 +14,8 @@ class Blogs extends Component {
         this.returnToPostList = this.returnToPostList.bind(this);
         this.sleep = this.sleep.bind(this);
         this.deletePost = this.deletePost.bind(this);
-        this.state = {posts: [], postIsClicked: false, currentPost: {}, logged: this.props.logged};
+        this.editBlogpost = this.editBlogpost.bind(this)
+        this.state = {posts: [], postIsClicked: false, currentPost: {}, logged: this.props.logged, edit: true};
     }
 
     /**
@@ -24,18 +25,18 @@ class Blogs extends Component {
         let url = 'http://localhost:8080/blogpost'
 
         fetch(url).then((response) => response.json()).then((blogList) => {
-                            this.setState({posts: blogList});
+            this.setState({posts: blogList});
             console.log(this.state.posts);
         })
     }
 
     /**
      * Used to update the UI when a new post is made.
-     * 
+     *
      * @param {*} props a boolean prop sent by App.js that is used when a new post is made.
      */
     componentWillReceiveProps(props) {
-        if(props.update) { 
+        if (props.update) {
             this.fetchPosts();
         }
         else {
@@ -49,7 +50,7 @@ class Blogs extends Component {
 
     /**
      * Opens a single blog post.
-     * 
+     *
      * @param {*} e Synthetic Event
      * @param {*} blog the blog post to open.
      */
@@ -62,8 +63,8 @@ class Blogs extends Component {
 
     /**
      * Sets flags to false, making the component render all posts again.
-     * 
-     * @param {*} e Synthetic Event 
+     *
+     * @param {*} e Synthetic Event
      */
     returnToPostList(e) {
         this.setState({postIsClicked: false, currentPost: {}});
@@ -75,21 +76,21 @@ class Blogs extends Component {
         console.log("Inside Handle change")
         let tempBlogList1 = this.state.posts;
         let finalBlogList = [];
-        if(e.target.value === '') {
-            
-           console.log("Empty")
-           this.setState({searching: false, searchPosts: this.state.posts});
+        if (e.target.value === '') {
+
+            console.log("Empty")
+            this.setState({searching: false, searchPosts: this.state.posts});
         } else {
             console.log("Not empty")
-            for(let blog of tempBlogList1) {
+            for (let blog of tempBlogList1) {
                 let blogBody = blog.body.toLowerCase();
                 let blogTitle = blog.title.toLowerCase();
                 let blogUser = blog.username.toLowerCase();
-                if(blogBody.includes(e.target.value.toLowerCase()) || blogTitle.includes(e.target.value.toLowerCase()) || blogUser.includes(e.target.value.toLowerCase())) {
+                if (blogBody.includes(e.target.value.toLowerCase()) || blogTitle.includes(e.target.value.toLowerCase()) || blogUser.includes(e.target.value.toLowerCase())) {
                     finalBlogList.push(blog);
                 }
             }
-            if(finalBlogList != undefined) {
+            if (finalBlogList != undefined) {
                 console.log(finalBlogList);
                 this.setState({searching: true, searchPosts: finalBlogList});
             } else {
@@ -101,6 +102,24 @@ class Blogs extends Component {
         //TODO shit here? or am i lost with this, i might be but atleast i wrote this here
     }
 
+    editBlogpost(id, e) {
+        var url = `http://localhost:8080/blogpost/${id}/edit`
+        console.log(url)
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({
+                title: this.state.title,
+                body: "TESTISETTIÄ TULEEKO TÄHÄN TKESTIÄ HOI HOI HOI HOI MOI KIKKELISKUKKELIS",
+                username: this.state.username
+            }),
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
+        }).then(res => res.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => console.log('Success:', response));
+        this.setState({title: "", body: "", username: ""});
+    }
 
 
     deletePost(id, e) {
@@ -108,20 +127,21 @@ class Blogs extends Component {
         var url = `http://localhost:8080/blogpost/${id}`
         console.log(url)
         fetch(url, {
-        method: 'DELETE'
+            method: 'DELETE'
         }).then(response => response.json())
-        .catch(() => console.log("Exception caught"))
-        .then(() => fetch(`http://localhost:8080/blogpost`).then((response) => response.json()).then((blogList) => {
-            this.setState({posts: blogList});
-        }));
-        
+            .catch(() => console.log("Exception caught"))
+            .then(() => fetch(`http://localhost:8080/blogpost`).then((response) => response.json()).then((blogList) => {
+                this.setState({posts: blogList});
+            }));
     }
 
-    sleep(ms) {return new Promise(resolve => setTimeout(resolve, ms));}
+    sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 
     /**
      * Renders either all posts or just a single post.
-     * 
+     *
      * If state postIsclicked is true, then it renders the post specified in currentPost
      * and all comments that are linked to that post. Otherwise it renders
      * all posts in the backend.
@@ -129,104 +149,121 @@ class Blogs extends Component {
     render() {
         console.log("CALLING RENDER!");
         let _this = this;
-        function editPost(id, e) {
-            e.preventDefault();
-            /*console.log('Click');
-            var url = `/blogpost/${id}/edit`
-            console.log(url)
-            fetch(url, {
-                method: 'POST',
-                body: JSON.stringify({title: this.state.title, body: this.state.body, username: this.state.username}),
-                headers: new Headers({
-                    'Content-Type': 'application/json'
-                })
-            }).then(res => res.json())
-                .catch(error => console.error('Error:', error))
-                .then(response => console.log('Success:', response));
-            this.setState({title: "", body: "", username: ""});
-            //Callback function to parent
-            this.props.postButtonClicked();*/
-            alert("hi")
-        }
 
         function dislikePost(id, e) {
             e.preventDefault();
             console.log('Dislike');
             console.log(id)
             var url = `http://localhost:8080/comment/${id}/dislike`
-            fetch(url);     
-        }  
-        
+            fetch(url);
+        }
+
         //If a post has NOT been clicked, go inside this loop
-        if(!this.state.postIsClicked) {
-                var blogList = this.state.posts;
-                var blogP = []
-            if(this.state.searching) {
+        if (!this.state.postIsClicked) {
+            var blogList = this.state.posts;
+            var blogP = []
+            if (this.state.searching) {
                 blogList = this.state.searchPosts
                 blogP = []
-            } 
-            for(let blog of blogList) {
+            }
+            for (let blog of blogList) {
                 //If the user is currently logged in as admin
                 var postBody = blog.body
-                if(postBody.length >= 100) {
-                    postBody = postBody.substring(0,postBody.length /3) + "...";
+                if (postBody.length >= 100) {
+                    postBody = postBody.substring(0, postBody.length / 3) + "...";
                 }
-                if(this.state.logged) {
-                blogP.push(
-                    <Row>
-                        <Col m={1}l={3}>
-                        </Col>
-                        <Col s={12} m={10} l={6}>
-                            <Card header={<CardTitle image='http://www.pizzaromaaventura.com/media/wysiwyg/pizza/pizzaromabanner.jpg'>{blog.title}</CardTitle>}
-                                actions={[<Button nameClass='readMoreButton' waves='light' onClick={(e) => this.openPost(e, blog)}>Read more</Button>,
-                                <Button waves='light' id={`dlt-${blog.id}`} onClick={(e) => this.deletePost(blog.id, e)}>Delete</Button>]}>
-                                <p>{blog.username}</p>
-                                <p>{postBody}</p>
-                            </Card>
-                        </Col>
-                    </Row>
-                )
-                //User is not currently logged in as admin
+                if (this.state.logged) {
+                    blogP.push(
+                        <Row>
+                            <Col m={1} l={3}>
+                            </Col>
+                            <Col s={12} m={10} l={6}>
+                                <Card header={<CardTitle
+                                    image='http://www.pizzaromaaventura.com/media/wysiwyg/pizza/pizzaromabanner.jpg'>{blog.title}</CardTitle>}
+                                      actions={[<Button nameClass='readMoreButton' waves='light'
+                                                        onClick={(e) => this.openPost(e, blog)}>Read more</Button>,
+                                          <Button waves='light' id={`dlt-${blog.id}`}
+                                                  onClick={(e) => this.deletePost(blog.id, e)}>Delete</Button>]}>
+                                    <p>{blog.username}</p>
+                                    <p>{postBody}</p>
+                                </Card>
+                            </Col>
+                        </Row>
+                    )
+                    //User is not currently logged in as admin
                 } else {
                     blogP.push(
                         <Row>
-                            <Col m={1}l={3}>
+                            <Col m={1} l={3}>
                             </Col>
                             <Col s={12} m={10} l={6}>
-                                <Card header={<CardTitle image='http://www.pizzaromaaventura.com/media/wysiwyg/pizza/pizzaromabanner.jpg'>{blog.title}</CardTitle>}
-                                actions={[<Button nameClass='readMoreButton' waves='light' onClick={(e) => this.openPost(e, blog)}>Read more</Button>]}>
+                                <Card header={<CardTitle
+                                    image='http://www.pizzaromaaventura.com/media/wysiwyg/pizza/pizzaromabanner.jpg'>{blog.title}</CardTitle>}
+                                      actions={[<Button nameClass='readMoreButton' waves='light'
+                                                        onClick={(e) => this.openPost(e, blog)}>Read more</Button>]}>
                                     {postBody}
-                            </Card>
+                                </Card>
                             </Col>
                         </Row>
-                    )                    
+                    )
                 }
             }
             blogP = blogP.reverse();
             return <div>
                 <Row>
-                <Col m={1}l={3}>
-                </Col>
-                <Col s={12} m={10} l={6}>
-                    <Input s={12} id={'searchBar'}  placeholder={'Search'} onChange={(e) => this.handleChange(e)}><Icon tiny>search</Icon></Input>
-                </Col>
-            </Row>
+                    <Col m={1} l={3}>
+                    </Col>
+                    <Col s={12} m={10} l={6}>
+                        <Input s={12} id={'searchBar'} placeholder={'Search'}
+                               onChange={(e) => this.handleChange(e)}><Icon tiny>search</Icon></Input>
+                    </Col>
+                </Row>
                 {blogP}
-                </div>
+            </div>
         }
         //A single post has been clicked
         else {
             console.log(`Hei kato tää!!!!`);
-            return (
-                
-                <span>
-                                        <Row>
-                        <Col m={2}l={2}>
+            if (this.state.logged) {
+                if (this.state.edit) {
+                    return (
+                        <span>
+                    <Row>
+                        <Col m={2} l={2}>
                         </Col>
-                        <Col s={12}l={8}>
-                          <Card horizontal header={<CardTitle image="http://www.pizzaromaaventura.com/media/wysiwyg/pizza/pizzaromabanner.jpg">{this.state.currentPost.title}</CardTitle>}
-                           actions={[<Button waves='light' href="#" onClick={(e) => this.returnToPostList(e)}>Go Back</Button>,
-                            <span id="singlePost">{this.state.currentPost.username} {this.state.currentPost.date}</span>]}>
+                        <Col s={12} l={8}>
+                          <Card horizontal header={<CardTitle
+                              image="http://www.pizzaromaaventura.com/media/wysiwyg/pizza/pizzaromabanner.jpg">{this.state.currentPost.title}</CardTitle>}
+                                actions={[<Button waves='light' href="#" onClick={(e) => this.returnToPostList(e)}>Go
+                                    Back</Button>, <Button waves='light' href="#"
+                                                           onClick={(e) => this.editBlogpost(1, e)}>Edit</Button>,
+                                    <span
+                                        id="singlePost">{this.state.currentPost.username} {this.state.currentPost.date}</span>]}>
+                              <p>testi</p>
+                             /*<Input ref={this.bodyField} type="textarea" id="body" l={4}rows="6" cols="25" placeholder='asfffffffffffffffffffffffffffffffffffffffffffffffffffffffffff' onChange={(e) => this.handleChange(e)}/>*/
+                          </Card>
+                          </Col>
+                    </Row>
+                    <Row>
+                        <Comment blogPostId={this.state.currentPost.id} logged={this.state.logged}/>
+                    </Row>
+                </span>
+                    );
+                }
+                else {
+                    return (
+                        <span>
+                    <Row>
+                        <Col m={2} l={2}>
+                        </Col>
+                        <Col s={12} l={8}>
+                          <Card horizontal header={<CardTitle
+                              image="http://www.pizzaromaaventura.com/media/wysiwyg/pizza/pizzaromabanner.jpg">{this.state.currentPost.title}</CardTitle>}
+                                actions={[<Button waves='light' href="#" onClick={(e) => this.returnToPostList(e)}>Go
+                                    Back</Button>, <Button waves='light' href="#"
+                                                           onClick={(e) => this.editBlogpost(1, e)}>Edit</Button>,
+                                    <span
+                                        id="singlePost">{this.state.currentPost.username} {this.state.currentPost.date}</span>]}>
                              <p>{this.state.currentPost.body}</p>
                           </Card>
                           </Col>
@@ -235,10 +272,43 @@ class Blogs extends Component {
                         <Comment blogPostId={this.state.currentPost.id} logged={this.state.logged}/>
                     </Row>
                 </span>
-            );
-
+                    );
+                }
+            }
+        else
+            {
+                return (
+                    <span>
+                    <Row>
+                        <Col m={2} l={2}>
+                        </Col>
+                        <Col s={12} l={8}>
+                          <Card horizontal header={<CardTitle
+                              image="http://www.pizzaromaaventura.com/media/wysiwyg/pizza/pizzaromabanner.jpg">{this.state.currentPost.title}</CardTitle>}
+                                actions={[<Button waves='light' href="#" onClick={(e) => this.returnToPostList(e)}>Go
+                                    Back</Button>,
+                                    <span
+                                        id="singlePost">{this.state.currentPost.username} {this.state.currentPost.date}</span>]}>
+                             <p>{this.state.currentPost.body}</p>
+                          </Card>
+                          </Col>
+                    </Row>
+                    <Row>
+                        <Comment blogPostId={this.state.currentPost.id} logged={this.state.logged}/>
+                    </Row>
+                </span>
+                );
+            }
         }
     }
 }
 
+/*<Row>
+                        <Col m={2} l={2}>
+                        </Col>
+                        <Col s={12} l={6}>
+                        <Input type="textarea" id="editBlogBody" placeholder={this.state.currentPost.body} onChange={(e) => this.handleChange(e)}/>
+                            <Button waves='light' href="#" onClick={(e) => {this.editBlogpost(this.state.currentPost.id, e)}} >SAVE</Button>
+                        </Col>
+                    </Row>*/
 export default Blogs;
