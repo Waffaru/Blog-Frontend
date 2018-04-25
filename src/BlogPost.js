@@ -57,7 +57,7 @@ class Blogs extends Component {
     openPost(e, blog) {
         console.log(blog);
         console.log(blog.id);
-        this.setState({postIsClicked: true, currentPost: blog, searching: false})
+        this.setState({postIsClicked: true, currentPost: blog, searching: false, edit: false})
         this.props.arePostsShowing();
     }
 
@@ -103,6 +103,8 @@ class Blogs extends Component {
         //TODO shit here? or am i lost with this, i might be but atleast i wrote this here
     }
     saveBlogPost(id,e){
+        console.log("CURRENT ID:");
+        console.log(id);
         var url = `http://localhost:8080/blogpost/${id}/edit`
         console.log(url)
         fetch(url, {
@@ -117,10 +119,14 @@ class Blogs extends Component {
             })
         }).then(res => res.json())
             .catch(error => console.error('Error:', error))
-            .then(response => console.log('Success:', response));
-        this.setState({title: "", body: "", username: "",edit: false});
+            .then(response => console.log('Success:', response)).then(() => {
+                let url2 = `http://localhost:8080/blogpost/${id}`
+                fetch(url2).then((promise) => promise.json()).then((blog) => {
+                    console.log("CURRENT BLOG");
+                    console.log(blog);
+                this.openPost(e, blog)});
+            });
     }
-
 
     deletePost(id, e) {
         console.log('Click');
@@ -134,11 +140,9 @@ class Blogs extends Component {
                 this.setState({posts: blogList});
             }));
     }
-
     sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
-
     /**
      * Renders either all posts or just a single post.
      *
@@ -180,7 +184,7 @@ class Blogs extends Component {
                             <Col s={12} m={10} l={6}>
                                 <Card header={<CardTitle
                                     image='http://www.pizzaromaaventura.com/media/wysiwyg/pizza/pizzaromabanner.jpg'>{blog.title}</CardTitle>}
-                                      actions={[<Button nameClass='readMoreButton' waves='light'
+                                      actions={[<Button waves='light'
                                                         onClick={(e) => this.openPost(e, blog)}>Read more</Button>,
                                           <Button waves='light' id={`dlt-${blog.id}`}
                                                   onClick={(e) => this.deletePost(blog.id, e)}>Delete</Button>]}>
@@ -193,13 +197,13 @@ class Blogs extends Component {
                     //User is not currently logged in as admin
                 } else {
                     blogP.push(
-                        <Row>
+                        <Row key={`cardNumber${blog.id}`}>
                             <Col m={1} l={3}>
                             </Col>
                             <Col s={12} m={10} l={6}>
                                 <Card header={<CardTitle
                                     image='http://www.pizzaromaaventura.com/media/wysiwyg/pizza/pizzaromabanner.jpg'>{blog.title}</CardTitle>}
-                                      actions={[<Button nameClass='readMoreButton' waves='light'
+                                      actions={[<Button key="openPostButton" waves='light'
                                                         onClick={(e) => this.openPost(e, blog)}>Read more</Button>]}>
                                     {postBody}
                                 </Card>
@@ -209,7 +213,7 @@ class Blogs extends Component {
                 }
             }
             blogP = blogP.reverse();
-            return <div>
+            return <div key="searchBarDiv">
                 <Row>
                     <Col m={1} l={3}>
                     </Col>
