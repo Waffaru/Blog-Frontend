@@ -119,7 +119,6 @@ class Blogs extends Component {
             })
         }).then(res => res.json())
             .catch(error => console.error('Error:', error))
-<<<<<<< HEAD
             .then(response => console.log('Success:', response)).then(() => {
                 let url2 = `http://localhost:8080/blogpost/${id}`
                 fetch(url2).then((promise) => promise.json()).then((blog) => {
@@ -127,10 +126,6 @@ class Blogs extends Component {
                     console.log(blog);
                 this.openPost(e, blog)});
             });
-=======
-            .then(response => this.setState({title: "", body: "", username: "",edit: false})
-        );
->>>>>>> a26142b1d80a0a4cbaa34fcc3678f5774f745460
     }
 
     deletePost(id, e) {
