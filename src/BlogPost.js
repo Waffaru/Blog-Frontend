@@ -117,8 +117,8 @@ class Blogs extends Component {
             })
         }).then(res => res.json())
             .catch(error => console.error('Error:', error))
-            .then(response => console.log('Success:', response));
-        this.setState({title: "", body: "", username: "",edit: false});
+            .then(response => this.setState({title: "", body: "", username: "",edit: false})
+        );
     }
 
 
@@ -302,13 +302,4 @@ class Blogs extends Component {
         }
     }
 }
-
-/*<Row>
-                        <Col m={2} l={2}>
-                        </Col>
-                        <Col s={12} l={6}>
-                        <Input type="textarea" id="editBlogBody" placeholder={this.state.currentPost.body} onChange={(e) => this.handleChange(e)}/>
-                            <Button waves='light' href="#" onClick={(e) => {this.editBlogpost(this.state.currentPost.id, e)}} >SAVE</Button>
-                        </Col>
-                    </Row>*/
 export default Blogs;

@@ -72,7 +72,7 @@ class Comment extends Component {
             //TODO: Fixaa UI update
             e.preventDefault();
             console.log('Click');
-            var url = `http://localhost:8080/blogpost/${id}`
+            var url = `http://localhost:8080/comment/${id}`
             console.log(url)
             fetch(url, {
             method: 'DELETE'
@@ -112,8 +112,8 @@ class Comment extends Component {
                         <Col s={12} m={12} l={8}>
                             <Card actions={[<a href='#' id={`dlt-${comment.id}`}  onClick={(e) => deletePost(comment.id, e)}>Delete</a>]}>
                                 <p id={'commentUsername'}>{comment.username}</p>
-                                <p id={'commentDate'}> {comment.date} { comment.dislikes}
-                                <Button floating className='red' waves='light' icon='thumb_down' id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}>  </Button> </p>
+                                <p id={'commentDate'}> {comment.date} Dislikes: { comment.dislikes}
+                                <Button floating className='red' waves='light' icon='thumb_down' id={`dislike-${comment.id}`} onClick={(e) => dislikePost(comment.id, e)}></Button> </p>
                                 <p id={'commentBody'}>{comment.body}</p>
                             </Card>
                         </Col>
