@@ -234,9 +234,12 @@ class Blogs extends Component {
                           <Card horizontal header={<CardTitle
                               image="http://www.pizzaromaaventura.com/media/wysiwyg/pizza/pizzaromabanner.jpg">{this.state.currentPost.title}</CardTitle>}
                                 actions={[<Button waves='light' href="#" onClick={(e) => this.returnToPostList(e)}>Go
-                                    Back</Button>,
+                                    Back</Button>,<Button waves='light' href="#"
+                                                          onClick={(e) => this.setState({})}>Save</Button>,<Button waves='light' href="#"
+                                                                                                                             onClick={(e) => this.setState({edit: false})}>Cancel</Button>,
                                     <span
                                         id="singlePost">{this.state.currentPost.username} {this.state.currentPost.date}</span>]}>
+                              <Row><Input type="textarea" id="editBlogBody" l={4}rows="16" cols="25" placeholder={this.state.currentPost.body}/></Row>
                           </Card>
                           </Col>
                     </Row>

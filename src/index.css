@@ -76,7 +76,7 @@ body {
 
 }
 #editBlogBody{
-    z-index: -1;
+    z-index: 300;
 }
 /* When blogpost is clicked open! */
 #openBlogpostUsername   {
