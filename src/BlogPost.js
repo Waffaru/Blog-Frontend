@@ -182,6 +182,7 @@ class Blogs extends Component {
                     )                    
                 }
             }
+            blogP = blogP.reverse();
             return <div>
                 <Row>
                 <Col m={1}l={3}>

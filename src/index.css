@@ -118,15 +118,17 @@ body {
 }
 
 #navBar {
-    background-color:#1C868F
+    background-color:#6d4c41;
+    background-image: url("texture.png");
+    background-size: 100% 100%;
 }
 
 .logButton {
-    background-color:#6d4c41;
+    background-color:#00796b;
 }
 
 .logButton:hover {
-    background-color:#9c786c;
+    background-color:#48a999;
 }
 
 .logField {
