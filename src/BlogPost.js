@@ -128,6 +128,26 @@ class Blogs extends Component {
             })
         }
 
+        function editPost(id, e) {
+            e.preventDefault();
+            /*console.log('Click');
+            var url = `/blogpost/${id}/edit`
+            console.log(url)
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({title: this.state.title, body: this.state.body, username: this.state.username}),
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                })
+            }).then(res => res.json())
+                .catch(error => console.error('Error:', error))
+                .then(response => console.log('Success:', response));
+            this.setState({title: "", body: "", username: ""});
+            //Callback function to parent
+            this.props.postButtonClicked();*/
+            alert("hi")
+        }
+
         function dislikePost(id, e) {
             e.preventDefault();
             console.log('Dislike');
@@ -150,7 +170,7 @@ class Blogs extends Component {
                 if(postBody.length >= 100) {
                     postBody = postBody.substring(0,postBody.length /3) + "...";
                 }
-                if(this.state.logged) {
+                if(this.state.logged && this.state.editing) {
                 blogP.push(
                     <Row>
                         <Col m={1}l={3}>
@@ -158,7 +178,6 @@ class Blogs extends Component {
                         <Col s={12} m={10} l={6}>
                             <Card header={<CardTitle image='http://www.pizzaromaaventura.com/media/wysiwyg/pizza/pizzaromabanner.jpg'>{blog.title}</CardTitle>}
                                 actions={[<Button nameClass='readMoreButton' waves='light' onClick={(e) => this.openPost(e, blog)}>Read more</Button>,
-                                <Button waves='light' id={`edit-${blog.id}`}>Edit</Button>,
                                 <Button waves='light' id={`dlt-${blog.id}`}  onClick={(e) => deletePost(blog.id, e)}>Delete</Button>  ]}>
                                 <p>{blog.username}</p>
                                 <p>{postBody}</p>
@@ -201,9 +220,9 @@ class Blogs extends Component {
                 
                 <span>
                                         <Row>
-                        <Col m={2}l={3}>
+                        <Col m={2}l={2}>
                         </Col>
-                        <Col s={12}l={6}>
+                        <Col s={12}l={8}>
                           <Card horizontal header={<CardTitle image="http://www.pizzaromaaventura.com/media/wysiwyg/pizza/pizzaromabanner.jpg">{this.state.currentPost.title}</CardTitle>}
                            actions={[<Button waves='light' href="#" onClick={(e) => this.returnToPostList(e)}>Go Back</Button>,
                             <span id="singlePost">{this.state.currentPost.username} {this.state.currentPost.date}</span>]}>
@@ -215,22 +234,6 @@ class Blogs extends Component {
                         <Comment blogPostId={this.state.currentPost.id} logged={this.state.logged}/>
                     </Row>
                 </span>
-
-                
-
-                    /*<Row>
-                        <Col m={2}l={3}>
-                        </Col>
-                        <Col s={12} m={12} l={12}>
-                            <Card className='small'
-                                  actions={[<Button waves='light' onClick={(e) => this.returnToPostList(e)}>Go back</Button>]}>
-                                <h1 id={'openBlogpostTitle'}>{this.state.currentPost.title}</h1>
-                                <p id={'openBlogpostUsername'}>{this.state.currentPost.username} @ {this.state.currentPost.date}</p>
-                                <p id={'openBlogpostBody'}>{this.state.currentPost.body}</p>
-                            </Card>
-                            <Comment blogPostId={this.state.currentPost.id} logged={this.state.logged}/>
-                        </Col>
-                    </Row>*/
             );
 
         }

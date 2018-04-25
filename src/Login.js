@@ -22,23 +22,27 @@ class Login extends Component {
         e.preventDefault();
         console.log("sending");
         console.log(this.state);
+        console.log(new Buffer((this.state.username + ":" + this.state.password)).toString('base64'));
+        let encoded = new Buffer((this.state.username + ":" + this.state.password)).toString('base64');
+        console.log(encoded);
 
         var url = 'http://localhost:8080/login';
         fetch(url, {
             method: 'POST',
-            body: JSON.stringify({username: this.state.username, password: this.state.password}),
+            body: JSON.stringify(encoded),
             headers: new Headers({
                 'Content-Type': 'application/json'
             })
         }).then(res => res.json())
             .catch(error => console.error('Error:', error))
             .then(response => {
-                if(response){
-                    this.setState({password: "", logged: response});
+                console.log(response)
+                if(response.status === 200){
+                    this.setState({password: "", logged: true});
                     this.logged = true;
                     this.props.checkLogin();
                 }else{
-                    this.setState({logged: response});
+                    this.setState({logged: false});
                 }
 
             });

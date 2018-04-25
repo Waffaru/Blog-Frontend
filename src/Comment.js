@@ -12,7 +12,7 @@ class Comment extends Component {
       this.fetchComments = this.fetchComments.bind(this);
       this.handleClick = this.handleClick.bind(this);
       this.handleChange = this.handleChange.bind(this);
-      this.state = {comments: [], blogPostId: this.props.blogPostId, logged: props.logged,body: this.props.body, username: this.props.username};
+      this.state = {comments: [], blogPostId: this.props.blogPostId, logged: props.logged, body: this.props.body, username: this.props.username};
     }
 
     /**
@@ -93,7 +93,7 @@ class Comment extends Component {
             console.log('Dislike');
             console.log(id)
             var url = `http://localhost:8080/comment/${id}/dislike`
-            fetch(url);     
+            fetch(url);
         }          
 
 
@@ -106,9 +106,9 @@ class Comment extends Component {
             for(let comment of commentList) {
                 commentArr.push(
                     <Row>
-                        <Col m={2}l={3}>
+                        <Col m={2}l={2}>
                         </Col>
-                        <Col s={12} m={12} l={6}>
+                        <Col s={12} m={12} l={8}>
                             <Card actions={[<a href='#' id={`edit-${comment.id}`}>Edit</a>, <a href='#' id={`dlt-${comment.id}`}  onClick={(e) => deletePost(comment.id, e)}>Delete</a>]}>
                                 <p id={'commentUsername'}>{comment.username}</p>
                                 <p id={'commentDate'}> {comment.date} { comment.dislikes}
@@ -122,9 +122,9 @@ class Comment extends Component {
             for(let comment of commentList) {
                 commentArr.push(
                     <Row>
-                        <Col m={2}l={3}>
+                        <Col m={2}l={2}>
                         </Col>
-                        <Col s={12} m={12} l={6}>
+                        <Col s={12} m={12} l={8}>
                             <Card>
                                 <p id={'commentUsername'}>{comment.username}</p>
                                 <p id={'commentDate'}> {comment.date} { comment.dislikes}
@@ -138,9 +138,9 @@ class Comment extends Component {
 
         return <div>
             <Row>
-                <Col m={2}l={3}>
+                <Col m={2}l={2}>
                 </Col>
-                <Col s={12} m={12} l={6}>
+                <Col s={12} m={12} l={8}>
                     <p>Post comment</p>
             <Card>
                 <Input ref="userField"  id='username'type="text" l={2} placeholder='Username' onChange={(e) => this.handleChange(e)}/>
