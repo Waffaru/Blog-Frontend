@@ -10,7 +10,9 @@ class Comment extends Component {
     constructor(props) {
       super(props);
       this.fetchComments = this.fetchComments.bind(this);
-      this.state = {comments: [], blogPostId: this.props.blogPostId, logged: props.logged};
+      this.handleClick = this.handleClick.bind(this);
+      this.handleChange = this.handleChange.bind(this);
+      this.state = {comments: [], blogPostId: this.props.blogPostId, logged: props.logged,body: this.props.body, username: this.props.username};
     }
 
     /**
@@ -34,7 +36,31 @@ class Comment extends Component {
             console.log("Is props logged? " + props.logged);
             this.setState({logged: props.logged});
         }
-    }    
+    }
+
+    handleChange(e) {
+        this.setState({ [e.target.id]: e.target.value });
+        console.log(`${e.target.id}: ${e.target.value}`);
+        console.log(this.state);
+    }
+
+
+    handleClick(e) {
+        e.preventDefault();
+        var url = 'http://localhost:8080/comment';
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({body: this.state.body, username: this.state.username, blogPostId: this.state.blogPostId}),
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
+        }).then(res => res.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => console.log('Success:', response));
+        this.setState({username: "", body: ""});
+        //Callback function to parent
+        //this.props.postButtonClicked();
+    }
   
     /**
      * Renders all comments related to the blog post id.
@@ -117,9 +143,9 @@ class Comment extends Component {
                 <Col s={12} m={12} l={6}>
                     <p>Post comment</p>
             <Card>
-                <Input ref="userField" type="text" l={2} placeholder='Username'/>
-                <Input ref="bodyField" s={8} id={'postCommentText'} type="text" placeholder='Comment' />
-                <Button waves='light' id="postComment" >post</Button>
+                <Input ref="userField"  id='username'type="text" l={2} placeholder='Username' onChange={(e) => this.handleChange(e)}/>
+                <Input ref="bodyField" s={8} id='body' type="text" placeholder='Comment' onChange={(e) => this.handleChange(e)} />
+                <Button waves='light' id="postComment" onClick={(e) => this.handleClick(e) }>Comment</Button>
             </Card>
                 </Col>
             </Row>

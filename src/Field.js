@@ -78,7 +78,7 @@ class Field extends Component {
                         <Col l={4}>
                         </Col>
                         <Input ref="userField" type="text" l={2} id="username" placeholder='Username' onChange={(e) => this.handleChange(e)}/>
-                        <Input ref="titleField"type="text" l={2}id="title" placeholder='Title' onChange={(e) => this.handleChange(e)}/>
+                        <Input ref="titleField"type="text" l={2} id="title" placeholder='Title' onChange={(e) => this.handleChange(e)}/>
                     </Row>
                     <Row>
                         <Col l={4}>
