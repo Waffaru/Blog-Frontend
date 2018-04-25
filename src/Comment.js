@@ -12,6 +12,7 @@ class Comment extends Component {
       this.fetchComments = this.fetchComments.bind(this);
       this.handleClick = this.handleClick.bind(this);
       this.handleChange = this.handleChange.bind(this);
+      this.sleep = this.sleep.bind(this);
       this.state = {comments: [], blogPostId: this.props.blogPostId, logged: props.logged, body: this.props.body, username: this.props.username};
     }
 
@@ -56,19 +57,17 @@ class Comment extends Component {
             })
         }).then(res => res.json())
             .catch(error => console.error('Error:', error))
-            .then(response => console.log('Success:', response));
-        this.setState({username: "", body: ""});
-        //Callback function to parent
-        //this.props.postButtonClicked();
+            .then(response => console.log('Success:', response)).then(() => this.setState({username: "", body: ""})).then(() => this.fetchComments());
     }
+
+
+    sleep(ms) {return new Promise(resolve => setTimeout(resolve, ms));}
   
     /**
      * Renders all comments related to the blog post id.
      */
     render() {
-        let _this = this;
-
-        function sleep(ms) {return new Promise(resolve => setTimeout(resolve, ms));}            
+        let _this = this;       
         function deletePost(id, e) {
             //TODO: Fixaa UI update
             e.preventDefault();
@@ -80,7 +79,7 @@ class Comment extends Component {
             }).then(response => response.json()).then();
             //koodi jossa se menee kantaan ja käskee poistamaan tossa urlissa olevaa dataa
 
-            sleep(100).then(() => {
+            this.sleep(100).then(() => {
                 fetch(`http://localhost:8080/blogpost`).then((response) => response.json()).then((blogList) => {
                             _this.setState({posts: blogList});
                 console.log(_this.state.posts);

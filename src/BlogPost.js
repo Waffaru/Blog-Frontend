@@ -13,6 +13,7 @@ class Blogs extends Component {
         this.openPost = this.openPost.bind(this);
         this.returnToPostList = this.returnToPostList.bind(this);
         this.sleep = this.sleep.bind(this);
+        this.deletePost = this.deletePost.bind(this);
         this.state = {posts: [], postIsClicked: false, currentPost: {}};
     }
 
@@ -100,7 +101,23 @@ class Blogs extends Component {
         //TODO shit here? or am i lost with this, i might be but atleast i wrote this here
     }
 
-    sleep(ms) {return new Promise(resolve => setTimeout(resolve, ms));}   z
+
+
+    deletePost(id, e) {
+        console.log('Click');
+        var url = `http://localhost:8080/blogpost/${id}`
+        console.log(url)
+        fetch(url, {
+        method: 'DELETE'
+        }).then(response => response.json())
+        .catch(() => console.log("Exception caught"))
+        .then(() => fetch(`http://localhost:8080/blogpost`).then((response) => response.json()).then((blogList) => {
+            this.setState({posts: blogList});
+        }));
+        
+    }
+
+    sleep(ms) {return new Promise(resolve => setTimeout(resolve, ms));}
 
     /**
      * Renders either all posts or just a single post.
@@ -110,24 +127,8 @@ class Blogs extends Component {
      * all posts in the backend.
      */
     render() {
+        console.log("CALLING RENDER!");
         let _this = this;
-    
-        function deletePost(id, e) {
-            e.preventDefault();
-            console.log('Click');
-            var url = `http://localhost:8080/blogpost/${id}`
-            console.log(url)
-            fetch(url, {
-            method: 'DELETE'
-            }).then(response => response.json()).then();
-            this.sleep(100).then(() => {
-                fetch(`http://localhost:8080/blogpost`).then((response) => response.json()).then((blogList) => {
-                            _this.setState({posts: blogList});
-                console.log(_this.state.posts);
-                })            
-            })
-        }
-
         function editPost(id, e) {
             e.preventDefault();
             /*console.log('Click');
@@ -170,7 +171,7 @@ class Blogs extends Component {
                 if(postBody.length >= 100) {
                     postBody = postBody.substring(0,postBody.length /3) + "...";
                 }
-                if(this.state.logged && this.state.editing) {
+                if(this.state.logged) {
                 blogP.push(
                     <Row>
                         <Col m={1}l={3}>
@@ -178,7 +179,7 @@ class Blogs extends Component {
                         <Col s={12} m={10} l={6}>
                             <Card header={<CardTitle image='http://www.pizzaromaaventura.com/media/wysiwyg/pizza/pizzaromabanner.jpg'>{blog.title}</CardTitle>}
                                 actions={[<Button nameClass='readMoreButton' waves='light' onClick={(e) => this.openPost(e, blog)}>Read more</Button>,
-                                <Button waves='light' id={`dlt-${blog.id}`}  onClick={(e) => deletePost(blog.id, e)}>Delete</Button>  ]}>
+                                <Button waves='light' id={`dlt-${blog.id}`} onClick={(e) => this.deletePost(blog.id, e)}>Delete</Button>]}>
                                 <p>{blog.username}</p>
                                 <p>{postBody}</p>
                             </Card>
