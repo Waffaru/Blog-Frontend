@@ -8,8 +8,9 @@ class Field extends Component {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
-        this.state = {title: "", body: "", username: "", logged: false, allPosts: true};
-        this.userField = React.createRef();
+        this.state = {title: "", body: "", username: this.props.username, logged: false, allPosts: true};
+        this.titleField = React.createRef();
+        this.bodyField = React.createRef();
     }
 
     componentWillReceiveProps(props) {
@@ -50,7 +51,7 @@ class Field extends Component {
         var url = 'http://localhost:8080/blogpost';
         fetch(url, {
             method: 'POST',
-            body: JSON.stringify({title: this.state.title, body: this.state.body, username: this.state.username}), 
+            body: JSON.stringify({title: this.state.title, body: this.state.body, username: this.props.username}), 
             headers: new Headers({
                 'Content-Type': 'application/json'
             })
@@ -58,6 +59,9 @@ class Field extends Component {
             .catch(error => console.error('Error:', error))
             .then(response => console.log('Success:', response));
             this.setState({title: "", body: "", username: ""});
+            console.log("SETTING VALUES TO ZERO");
+            this.titleField.current.input.value = "";
+            this.bodyField.current.input.value ="";
             //Callback function to parent
             this.props.postButtonClicked();
     }
@@ -77,13 +81,13 @@ class Field extends Component {
                         <Row>
                         <Col l={4}>
                         </Col>
-                        <Input ref="userField" type="text" l={2} id="username" placeholder='Username' onChange={(e) => this.handleChange(e)}/>
-                        <Input ref="titleField"type="text" l={2} id="title" placeholder='Title' onChange={(e) => this.handleChange(e)}/>
+                        <Input ref="userField" type="text" l={2} id="username" placeholder='Username' value={this.props.username} disabled/>
+                        <Input ref={this.titleField} type="text" l={2} id="title" placeholder='Title' onChange={(e) => this.handleChange(e)}/>
                     </Row>
                     <Row>
                         <Col l={4}>
                         </Col>
-                        <Input ref="bodyField" type="textarea" id="body" l={4}rows="6" cols="25" placeholder='Kirjoita tähän' onChange={(e) => this.handleChange(e)}/>
+                        <Input ref={this.bodyField} type="textarea" id="body" l={4}rows="6" cols="25" placeholder='Kirjoita tähän' onChange={(e) => this.handleChange(e)}/>
 
                     </Row>   
                     <Row> 

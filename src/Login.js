@@ -9,6 +9,7 @@ class Login extends Component {
         this.logOut = this.logOut.bind(this);
         this.state = {username: "", password: "", logged: false};
         this.logged = false;
+        this.username = null;
     }
 
     handleChange(e) {
@@ -38,7 +39,7 @@ class Login extends Component {
                 if(response.status === 200){
                     this.setState({password: "", logged: true});
                     this.logged = true;
-                    this.props.checkLogin();
+                    this.props.checkLogin(this.state.username);
                 }else{
                     this.setState({logged: false});
                 }
@@ -57,7 +58,7 @@ class Login extends Component {
     logOut(){
         this.setState({logged: false});
         this.logged = false;
-        this.props.checkLogin();
+        this.props.checkLogin(this.state.username);
     }
     render() {
         if(!this.state.logged){
