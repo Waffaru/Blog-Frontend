@@ -198,18 +198,18 @@ class Blogs extends Component {
         else {
             console.log(`Hei kato tää!!!!`);
             return (
+                
                 <span>
-                    <Row>
-                        <Col s={9} m={5}>
-                            <CardPanel className="testi">
-                                <span></span>
-                            </CardPanel>
-                            <Button waves='light' onClick={(e) => this.returnToPostList(e)}>Go back</Button>
+                                        <Row>
+                        <Col m={2}l={3}>
                         </Col>
-                        <Col s={12} m={7}>
-                            <h2>{this.state.currentPost.title}</h2>
-                            <p id={'korttijuttu'}>{this.state.currentPost.body}|||| {this.state.currentPost.username}</p>
-                        </Col>
+                        <Col s={12}l={6}>
+                          <Card horizontal header={<CardTitle image="http://www.pizzaromaaventura.com/media/wysiwyg/pizza/pizzaromabanner.jpg">{this.state.currentPost.title}</CardTitle>}
+                           actions={[<Button waves='light' href="#" onClick={(e) => this.returnToPostList(e)}>Go Back</Button>,
+                            <span id="singlePost">{this.state.currentPost.username} {this.state.currentPost.date}</span>]}>
+                             <p>{this.state.currentPost.body}</p>
+                          </Card>
+                          </Col>
                     </Row>
                     <Row>
                         <Comment blogPostId={this.state.currentPost.id} logged={this.state.logged}/>
