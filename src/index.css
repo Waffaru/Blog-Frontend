@@ -41,7 +41,10 @@ body {
 /* Blogpost main mother div */
 #mainBlogpostDiv{
 
+}
 
+#postComment{
+    display: flex;
 }
 
 /* Main page blogpost title! */

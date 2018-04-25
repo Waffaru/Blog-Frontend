@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Row,Col,Card,Button, Icon} from 'react-materialize';
+import {Row,Col,Card,Button, Icon, Input} from 'react-materialize';
 /**
  * This component handles all comments of any specified post.
  * It is used to render all the comments of a specified post.
@@ -110,7 +110,20 @@ class Comment extends Component {
             }            
         }
 
-        return <div>{commentArr}</div>
+        return <div>
+            <Row>
+                <Col m={2}l={3}>
+                </Col>
+                <Col s={12} m={12} l={6}>
+                    <p>Post comment</p>
+            <Card>
+                <Input ref="userField" type="text" l={2} placeholder='Username'/>
+                <Input ref="bodyField" s={8} id={'postCommentText'} type="text" placeholder='Comment' />
+                <Button waves='light' id="postComment" >post</Button>
+            </Card>
+                </Col>
+            </Row>
+            {commentArr}</div>
     }
   }
 
