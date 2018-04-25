@@ -33,10 +33,8 @@ class Login extends Component {
             headers: new Headers({
                 'Content-Type': 'application/json'
             })
-        }).then(res => res.json())
-            .catch(error => console.error('Error:', error))
-            .then(response => {
-                console.log(response)
+        }).then(response => {
+                            console.log(response)
                 if(response.status === 200){
                     this.setState({password: "", logged: true});
                     this.logged = true;
@@ -44,6 +42,9 @@ class Login extends Component {
                 }else{
                     this.setState({logged: false});
                 }
+        })
+            .catch(error => console.error('Error:', error))
+            .then(response => {
 
             });
         console.log(this.state.logged);
