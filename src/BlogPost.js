@@ -14,6 +14,7 @@ class Blogs extends Component {
         this.returnToPostList = this.returnToPostList.bind(this);
         this.sleep = this.sleep.bind(this);
         this.deletePost = this.deletePost.bind(this);
+        this.editBody = React.createRef();
         this.state = {posts: [], postIsClicked: false, currentPost: {}, logged: this.props.logged, edit: false};
     }
 
@@ -108,7 +109,7 @@ class Blogs extends Component {
             method: 'POST',
             body: JSON.stringify({
                 title: this.state.title,
-                body: "TESTISETTIÄ TULEEKO TÄHÄN TKESTIÄ HOI HOI HOI HOI MOI KIKKELISKUKKELIS",
+                body: this.editBody.current.input.value,
                 username: this.state.username
             }),
             headers: new Headers({
@@ -117,7 +118,7 @@ class Blogs extends Component {
         }).then(res => res.json())
             .catch(error => console.error('Error:', error))
             .then(response => console.log('Success:', response));
-        this.setState({title: "", body: "", username: ""});
+        this.setState({title: "", body: "", username: "",edit: false});
     }
 
 
@@ -235,11 +236,11 @@ class Blogs extends Component {
                               image="http://www.pizzaromaaventura.com/media/wysiwyg/pizza/pizzaromabanner.jpg">{this.state.currentPost.title}</CardTitle>}
                                 actions={[<Button waves='light' href="#" onClick={(e) => this.returnToPostList(e)}>Go
                                     Back</Button>,<Button waves='light' href="#"
-                                                          onClick={(e) => this.setState({})}>Save</Button>,<Button waves='light' href="#"
+                                                          onClick={(e) => this.saveBlogPost(this.state.currentPost.id,e)}>Save</Button>,<Button waves='light' href="#"
                                                                                                                              onClick={(e) => this.setState({edit: false})}>Cancel</Button>,
                                     <span
                                         id="singlePost">{this.state.currentPost.username} {this.state.currentPost.date}</span>]}>
-                              <Row><Input type="textarea" id="editBlogBody" l={4}rows="16" cols="25" placeholder={this.state.currentPost.body}/></Row>
+                              <Row><Input ref={this.editBody} type="textarea" id="editBlogBody" l={12}rows="16" cols="25" placeholder={this.state.currentPost.body}/></Row>
                           </Card>
                           </Col>
                     </Row>
