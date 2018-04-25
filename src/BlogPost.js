@@ -14,8 +14,7 @@ class Blogs extends Component {
         this.returnToPostList = this.returnToPostList.bind(this);
         this.sleep = this.sleep.bind(this);
         this.deletePost = this.deletePost.bind(this);
-        this.editBlogpost = this.editBlogpost.bind(this)
-        this.state = {posts: [], postIsClicked: false, currentPost: {}, logged: this.props.logged, edit: true};
+        this.state = {posts: [], postIsClicked: false, currentPost: {}, logged: this.props.logged, edit: false};
     }
 
     /**
@@ -69,6 +68,7 @@ class Blogs extends Component {
     returnToPostList(e) {
         this.setState({postIsClicked: false, currentPost: {}});
         this.props.arePostsShowing();
+        this.setState({edit: false})
     }
 
     handleChange(e) {
@@ -101,8 +101,7 @@ class Blogs extends Component {
 
         //TODO shit here? or am i lost with this, i might be but atleast i wrote this here
     }
-
-    editBlogpost(id, e) {
+    saveBlogPost(id,e){
         var url = `http://localhost:8080/blogpost/${id}/edit`
         console.log(url)
         fetch(url, {
@@ -235,12 +234,9 @@ class Blogs extends Component {
                           <Card horizontal header={<CardTitle
                               image="http://www.pizzaromaaventura.com/media/wysiwyg/pizza/pizzaromabanner.jpg">{this.state.currentPost.title}</CardTitle>}
                                 actions={[<Button waves='light' href="#" onClick={(e) => this.returnToPostList(e)}>Go
-                                    Back</Button>, <Button waves='light' href="#"
-                                                           onClick={(e) => this.editBlogpost(1, e)}>Edit</Button>,
+                                    Back</Button>,
                                     <span
                                         id="singlePost">{this.state.currentPost.username} {this.state.currentPost.date}</span>]}>
-                              <p>testi</p>
-                             /*<Input ref={this.bodyField} type="textarea" id="body" l={4}rows="6" cols="25" placeholder='asfffffffffffffffffffffffffffffffffffffffffffffffffffffffffff' onChange={(e) => this.handleChange(e)}/>*/
                           </Card>
                           </Col>
                     </Row>
@@ -261,7 +257,7 @@ class Blogs extends Component {
                               image="http://www.pizzaromaaventura.com/media/wysiwyg/pizza/pizzaromabanner.jpg">{this.state.currentPost.title}</CardTitle>}
                                 actions={[<Button waves='light' href="#" onClick={(e) => this.returnToPostList(e)}>Go
                                     Back</Button>, <Button waves='light' href="#"
-                                                           onClick={(e) => this.editBlogpost(1, e)}>Edit</Button>,
+                                                           onClick={(e) => this.setState({edit: true})}>Edit</Button>,
                                     <span
                                         id="singlePost">{this.state.currentPost.username} {this.state.currentPost.date}</span>]}>
                              <p>{this.state.currentPost.body}</p>
