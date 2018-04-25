@@ -14,17 +14,17 @@ class Blogs extends Component {
         this.returnToPostList = this.returnToPostList.bind(this);
         this.sleep = this.sleep.bind(this);
         this.deletePost = this.deletePost.bind(this);
-        this.state = {posts: [], postIsClicked: false, currentPost: {}};
+        this.state = {posts: [], postIsClicked: false, currentPost: {}, logged: this.props.logged};
     }
 
     /**
      * fetchs all blogposts from the backend.
      */
-    fetchPosts() {
+    fetchPosts(props) {
         let url = 'http://localhost:8080/blogpost'
 
         fetch(url).then((response) => response.json()).then((blogList) => {
-                            this.setState({posts: blogList, logged: false});
+                            this.setState({posts: blogList});
             console.log(this.state.posts);
         })
     }

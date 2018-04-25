@@ -92,7 +92,9 @@ class Comment extends Component {
             console.log('Dislike');
             console.log(id)
             var url = `http://localhost:8080/comment/${id}/dislike`
-            fetch(url);
+            fetch(url).then(() =>{
+                _this.fetchComments();
+            });
         }          
 
 
