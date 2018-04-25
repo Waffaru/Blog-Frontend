@@ -119,6 +119,7 @@ class Blogs extends Component {
             })
         }).then(res => res.json())
             .catch(error => console.error('Error:', error))
+<<<<<<< HEAD
             .then(response => console.log('Success:', response)).then(() => {
                 let url2 = `http://localhost:8080/blogpost/${id}`
                 fetch(url2).then((promise) => promise.json()).then((blog) => {
@@ -126,6 +127,10 @@ class Blogs extends Component {
                     console.log(blog);
                 this.openPost(e, blog)});
             });
+=======
+            .then(response => this.setState({title: "", body: "", username: "",edit: false})
+        );
+>>>>>>> a26142b1d80a0a4cbaa34fcc3678f5774f745460
     }
 
     deletePost(id, e) {
@@ -306,13 +311,4 @@ class Blogs extends Component {
         }
     }
 }
-
-/*<Row>
-                        <Col m={2} l={2}>
-                        </Col>
-                        <Col s={12} l={6}>
-                        <Input type="textarea" id="editBlogBody" placeholder={this.state.currentPost.body} onChange={(e) => this.handleChange(e)}/>
-                            <Button waves='light' href="#" onClick={(e) => {this.editBlogpost(this.state.currentPost.id, e)}} >SAVE</Button>
-                        </Col>
-                    </Row>*/
 export default Blogs;
