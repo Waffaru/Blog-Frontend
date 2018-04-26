@@ -15,6 +15,7 @@ class Blogs extends Component {
         this.sleep = this.sleep.bind(this);
         this.deletePost = this.deletePost.bind(this);
         this.editBody = React.createRef();
+        this.reloadPost = this.reloadPost.bind(this);
         this.state = {posts: [], postIsClicked: false, currentPost: {}, logged: this.props.logged, edit: false};
     }
 
@@ -59,6 +60,13 @@ class Blogs extends Component {
         console.log(blog.id);
         this.setState({postIsClicked: true, currentPost: blog, searching: false, edit: false})
         this.props.arePostsShowing();
+    }
+
+
+    reloadPost(e, blog) {
+        console.log(blog);
+        console.log(blog.id);
+        this.setState({postIsClicked: true, currentPost: blog, searching: false, edit: false})
     }
 
     /**
@@ -124,7 +132,7 @@ class Blogs extends Component {
                 fetch(url2).then((promise) => promise.json()).then((blog) => {
                     console.log("CURRENT BLOG");
                     console.log(blog);
-                this.openPost(e, blog)});
+                this.reloadPost(e, blog)});
             });
     }
 
