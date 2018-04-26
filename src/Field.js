@@ -87,7 +87,7 @@ class Field extends Component {
                     <Row>
                         <Col l={4}>
                         </Col>
-                        <Input ref={this.bodyField} type="textarea" id="body" l={4}rows="6" cols="25" placeholder='Kirjoita tähän' onChange={(e) => this.handleChange(e)}/>
+                        <Input ref={this.bodyField} type="textarea" id="body" l={4}rows="6" cols="25" placeholder='Type here' onChange={(e) => this.handleChange(e)}/>
 
                     </Row>   
                     <Row> 

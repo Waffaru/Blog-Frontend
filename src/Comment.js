@@ -13,6 +13,8 @@ class Comment extends Component {
       this.handleClick = this.handleClick.bind(this);
       this.handleChange = this.handleChange.bind(this);
       this.sleep = this.sleep.bind(this);
+      this.userField = React.createRef();
+      this.bodyField = React.createRef();
       this.state = {comments: [], blogPostId: this.props.blogPostId, logged: props.logged, body: this.props.body, username: this.props.username};
     }
 
@@ -58,6 +60,8 @@ class Comment extends Component {
         }).then(res => res.json())
             .catch(error => console.error('Error:', error))
             .then(response => console.log('Success:', response)).then(() => this.setState({username: "", body: ""})).then(() => this.fetchComments());
+        this.userField.current.input.value ="";
+        this.bodyField.current.input.value ="";
     }
 
 
@@ -79,11 +83,10 @@ class Comment extends Component {
             }).then(response => response.json()).then();
             //koodi jossa se menee kantaan ja käskee poistamaan tossa urlissa olevaa dataa
 
-            this.sleep(100).then(() => {
-                fetch(`http://localhost:8080/blogpost`).then((response) => response.json()).then((blogList) => {
-                            _this.setState({posts: blogList});
-                console.log(_this.state.posts);
-                })            
+            _this.sleep(100).then(() => {
+                fetch(`http://localhost:8080/blogpost`).then(() =>{
+                    _this.fetchComments();
+                });
             })
         }
 
@@ -144,8 +147,8 @@ class Comment extends Component {
                 <Col s={12} m={12} l={8}>
                     <p>Post comment</p>
             <Card>
-                <Input ref="userField"  id='username'type="text" l={2} placeholder='Username' onChange={(e) => this.handleChange(e)}/>
-                <Input ref="bodyField" s={8} id='body' type="text" placeholder='Comment' onChange={(e) => this.handleChange(e)} />
+                <Input ref={this.userField}  id='username'type="text" l={2} placeholder='Username' onChange={(e) => this.handleChange(e)}/>
+                <Input ref={this.bodyField} s={8} id='body' type="text" placeholder='Comment' onChange={(e) => this.handleChange(e)} />
                 <Button waves='light' id="postComment" onClick={(e) => this.handleClick(e) }>Comment</Button>
             </Card>
                 </Col>
