@@ -64,21 +64,18 @@ class Login extends Component {
         if(!this.state.logged){
             return (
                     <Row>
-                        <Col l={12}>
                             <Navbar id="navBar" brand={'Pizza Lovers Blog'} right>
-                                    <Input className="logField" s={4} type="text" id="username" label="Username" onChange={(e) => this.handleChange(e)}/>
+                                    <Input className="logField" s={2}m={4} type="text" id="username" label="Username" onChange={(e) => this.handleChange(e)}/>
 
-                                    <Input className="logField" s={5} type="password" id="password" label="Password" onChange={(e) => this.handleChange(e)}/>
+                                    <Input className="logField" rows="1" cols="5" s={2}m={5} type="password" id="password" label="Password" onChange={(e) => this.handleChange(e)}/>
 
-                                    <Button className="logButton" waves='light' s={3} type="submit" id="loginBtn" onClick={(e) => this.handleClick(e)}>Login</Button>
+                                    <Button className="logButton" waves='light' s={12}m={3} type="submit" id="loginBtn" onClick={(e) => this.handleClick(e)}>Login</Button>
                             </Navbar>
-                        </Col>
                     </Row>
             );
         }else {
             return (
                     <Row>
-                        <Col l={12}>
                             <Navbar id="navBar" brand={'Pizza Lovers Blog'} right>
                                     <Row>
                                     <Col l={6}>
@@ -89,7 +86,6 @@ class Login extends Component {
                                     </Col>
                                     </Row>
                             </Navbar>
-                        </Col>
                     </Row>
             );
         }
